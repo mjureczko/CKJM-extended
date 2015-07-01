@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Operation</title>
+
+
+
+<meta name="Generator" content="$Id: thread.pl 1.62 2006/09/19 16:53:01 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./intro.html" />
+<link rel="next" href="./insel.html" />
+
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style><!-- LS-START -->
+<script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+</script><!-- LS-END --></head><body>
+<h1>Operation</h1>
+To run <em>ckjm</em> you must run java with the <code>-jar</code>
+flag, providing as its argument the location of the file
+<code>ckjm.jar</code>.
+Next, you can specify as arguments the Java class files you want
+to analyze.
+<br />
+Example:
+<pre>java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm_ext.jar build/classes/gr/spinellis/ckjm/*.class<br /></pre>
+(Replace the sequence <code>/usr/local/lib/ckjm-1.5.jar</code>
+with the actual path and filename of the <em>ckjm</em> version you are using.)
+<p>
+The command's output will be a list of class names (prefixed by the
+package they are defined in), followed by the corresponding
+metrics for that class: WMC, DIT, NOC, CBO, RFC, LCOM, Ca, Ce, NPM,
+LCOM3, LOC, DAM, MOA, MFA, CAM, IC, CBM and AMC . In lines where at the begining is "~" is the value of CC.
+CC is counted for all methods in given class.
+</p><pre>test.TestClass  3 1 0 1 8 1 1 1 1 0.0000 115 0.0000 0 0.0000 0.5556 0 0 37.0000<br /> ~ void m2(): 6<br /> ~ public void &lt;init&gt;(): 1<br /> ~ void m1(): 7<br /><br />
+test.TestClass2 5 1 0 1 11 4 1 1 0 0.4167 53 0.3333 1 0.0000 0.6250 0 0 9.0000<br /> ~ int m3(int jk): 1<br /> ~ void &lt;init&gt;(): 1<br /> ~ void m2(): 1<br /> ~ static void &lt;clinit&gt;(): 1<br /> ~ void m1(): 2<br /></pre>
+<p>
+If the classes are located in a <em>jar</em> archives, you can
+specify the archive name instead of filenames of Java classes.
+You can also specify several jar (or class) names separated with the semicolon (';').
+</p><pre>java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm_ext.jar <font color="#804040"><b>'</b></font><font color="#ff00ff">ant-jai.jar;bcel.jar</font><font color="#804040"><b>'</b></font>
+</pre>
+<p>
+If you specify neither jars nor classes to analyse ckjm will prompt you to type some.
+</p>
+<p>
+Finally, instead of specifying the classes to be analyzed as the
+command's arguments, you pass them (as class files, or as jar file, class
+file pairs) on the command's standard input.
+The following example will process all class files located in the
+build directory.
+</p><pre>find build <font color="#6a5acd">-name</font> <font color="#804040"><b>'</b></font><font color="#ff00ff">*.class</font><font color="#804040"><b>'</b></font> <font color="#6a5acd">-print</font> <font color="#804040"><b>|</b></font> java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm_ext.jar<br /></pre>
+<p>
+The program, by default, will not take into account classes that belong
+to the Java SDK packages.
+The command-line option switch <code>-s</code>, can be used to enable this
+processing.
+</p>
+<p>
+   You can take into consideration only public method by setting the command-line option switch <code>-p</code>.
+   By default, all methods are taken into account.
+
+</p>
+<p>
+    The command-line option switch <code>-x</code> will change the output format to xml.
+    By default, it is plain text as in the above example.<br />
+
+Example:
+</p>
+<pre>java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm_ext.jar -x build/classes/gr/spinellis/ckjm/*.class<br /></pre>
+<p><br />
+
+</p>
+    
+<table width="100%"><tbody><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td class="navigate" align="right"><a href="./intro.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./insel.html" accesskey="N" id="next">Next (Using Pipelines to Select Classes)&nbsp;»</a></td></tr></tbody></table>
+
+
+<hr /> <p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left" /></a>
+&nbsp;Last change: Jul 23, 2011 12:11 am
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-Noncommercial-No Derivative Works 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body></html>

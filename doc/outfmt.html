@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Using Pipelines to Format the Output</title>
+
+
+
+
+
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./insel.html" />
+<link rel="next" href="./metric.html" />
+
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style><!-- LS-START -->
+<script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+</script><!-- LS-END --></head><body>
+<h1>Using Pipelines to Format the Output</h1>The output of <em>ckjm</em>
+is textual. It could be plain text or xml. In the case of xml an XSL
+transformation may be used to convert the output to html:&nbsp;
+<pre>xsltproc -o ckjm.html path_to_xsl/ckjm.xsl path_to_ckjm_xml_outputfile/ckjm.xml<font color="#008080"></font>
+</pre>
+
+
+The distribution contains in the <code>xsl</code> directory
+two sample XSL files.<br />
+<p>You can also plot the results in various formats by using
+<a href="http://www.gnuplot.info">gnuplot</a>.
+Here is a diagram depicting the distribution of the CBO metric within
+the classes of <a href="http://www.eclipse.org">Eclipse</a>.<br />
+<img src="eclipse-cbo.png" alt="the distribution of the CBO metric within the classes of Eclipse" />
+</p><p>
+   To copy the <em>ckjm</em>'s output to the Microsoft Windows clipboard
+to later paste the results into an MS-Word table, simply
+pipe the output of <em>ckjm</em> to the <em>winclip</em> command of the
+<a href="../../outwit">Outwit</a> tool suite. 
+</p><table width="100%"><tbody><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td class="navigate" align="right"><a href="./insel.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./metric.html" accesskey="N" id="next">Next (Metric Descriptions)&nbsp;»</a></td></tr></tbody></table>
+
+
+
+<hr /> <p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left" /></a>
+&nbsp;Last change: July 23, 2011 11:10 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-Noncommercial-No Derivative Works 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body></html>

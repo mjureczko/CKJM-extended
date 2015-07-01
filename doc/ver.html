@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+<html><head><title>Version History</title>
+
+
+
+
+
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<link rev="made" href="mailto:dds@aueb.gr">
+<link rel="ToC" href="index.html">
+<link rev="Subdocument" href="index.html">
+<link rel="previous" href="./bib.html">
+<link rel="next" href="./faq.html">
+
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style><!-- LS-START -->
+<script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+</script><!-- LS-END --></head><body>
+<h1>Version History</h1>
+<dl>
+
+<h2>CKJM extended</h2>
+<dt>Version 2.1 2011-07-24</dt><dd>
+<ul>
+<li> Updated documentation.</li>
+<li>Added xml output to command-line user interfce.</li>
+      <li>Updated XSLs.</li>
+      <li>XSLs included into the zip distribution.</li>
+      <li>API adjusted to new functionalities from v. 2.0.<br>
+      </li>
+
+</ul>
+</dd>
+
+<dt>Version 2.0 2009-07-22</dt><dd>
+<ul>
+<li> New metrics: LCOM3, LOC, DAM, MOA, MFA, CAM, IC, CBM, AMC and CC.</li>
+<li> Redefined "coupling" metrics: CBO, Ca and Ce.</li>
+<li> Better support for jar archives.</li>
+<li> Many refacorings (for example project has been modified from an ant project to a Netbeans project).</li>
+<li> JavaBean interface.</li>
+<li> Test coverage has been increased.</li>
+</ul>
+</dd>
+
+<h2>CKJM</h2>
+<dt>Version 1.8 2007-07-25 </dt><dd>
+<ul>
+<li> Contributed code contains Ruby scripts that plot ckjm metrics as charts.</li>
+<li> The DIT calculation now also takes into account classes that are not
+directly processed.
+This may require explicitly setting up the java.ext.dirs property so that
+<em>ckjm</em> can locate the jar files containing those classes.
+Example:
+<pre>java <font color="#6a5acd">-Djava</font>.<font color="#008080">ext.dirs</font>=lib <font color="#6a5acd">-jar</font> ckjm<font color="#ff00ff">-1</font>.<font color="#ff00ff">8</font>.jar *.class<br></pre>
+In the corresponding <em>ant</em> task, the new <code>extdirs</code>
+<a href="http://ant.apache.org/manual/using.html#path">path-like structure</a>
+of the <em>ckjm</em> task will accomplish the same function.
+Example:
+<pre><font color="#008080">&lt;</font><font color="#008080">ckjm</font><font color="#008080"> </font><font color="#2e8b57"><b>outputfile</b></font>=<font color="#ff00ff">"hsqldb.xml"</font><font color="#008080"> </font><font color="#2e8b57"><b>format</b></font>=<font color="#ff00ff">"xml"</font><font color="#008080"> </font><font color="#2e8b57"><b>classdir</b></font>=<font color="#ff00ff">"/app/hsqldb/classes"</font><font color="#008080">&gt;</font>
+  <font color="#008080">&lt;</font><font color="#008080">extdirs</font><font color="#008080"> </font><font color="#2e8b57"><b>path</b></font>=<font color="#ff00ff">"/app/hsqldb/lib"</font><font color="#008080"> /&gt;</font>
+  <font color="#008080">&lt;</font><font color="#008080">include</font><font color="#008080"> </font><font color="#2e8b57"><b>name</b></font>=<font color="#ff00ff">"**/*.class"</font><font color="#008080"> /&gt;</font>
+<font color="#008080">&lt;/ckjm&gt;</font>
+</pre>
+(This issue was discovered by 최재영(Choi Jae Young).)
+</li>
+</ul>
+</dd>
+
+<dt>Version 1.7 2006-04-14</dt><dd>
+<ul>
+<li> Improve source code organization </li>
+<li> Add javadoc documentation </li>
+</ul>
+</dd>
+
+<dt>Version 1.6 2005-11-05</dt><dd>
+<ul>
+<li> Fix confusion between afferent and efferent couplings. (noted by Christian Hansen)</li>
+</ul>
+</dd>
+
+<dt>Version 1.5 2005-10-15</dt><dd>
+<ul>
+<li> Add number of public methods (NPM) metric.</li>
+<li> Declared exceptions affect coupling measurements (Antti Pöyhönen).</li>
+<li> Option to report only public classes.</li>
+<li> Count number of public methods.</li>
+<li> Calls to different overloaded methods are measured separately (Antti Pöyhönen.</li>
+<li> The XSL transformations are now more intelligent,
+and therefore easier to modify. (Julien Rentrop). </li>
+</ul>
+</dd>
+
+<dt>Version 1.4 2005-07-30</dt><dd>
+<ul>
+<li> Added new class metric: efferent couplings (Ce). </li>
+<li> Added command-line switch -s to enable the processing of the Java SDK
+classes. </li>
+</ul>
+</dd>
+
+<dt>Version 1.3 2005-06-02</dt><dd>
+<ul>
+<li> Also count own class's methods when measuring RFC (Antti Pöyhönen). </li>
+</ul>
+</dd>
+
+<dt>Version 1.2 2005-05-11</dt><dd>
+<ul>
+<li> Fix problem where processing JRE would hang following Object's parent (Object). </li>
+<li> Add Ant task, XML output, and XSL files. (Julien Rentrop). </li>
+</ul>
+</dd>
+
+<dt>Version 1.1 2005-02-21</dt><dd>
+<ul>
+<li> First public release. </li>
+</ul>
+</dd>
+
+</dl>
+
+<p>
+<table width="100%"><tbody><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td class="navigate" align="right"><a href="./bib.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./faq.html" accesskey="N" id="next">Next (Frequently Asked Questions)&nbsp;»</a></td></tr></tbody></table></p>
+
+
+<hr> <p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left"></a>
+&nbsp;Last change: May 06, 2011 5:53 pm
+<br>
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-Noncommercial-No Derivative Works 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body></html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML//EN">
+<html><head>
+  <a><title>Frequently Asked Questions</title>
+  
+  <meta name="Generator" content="$Id: thread.pl 1.62 2006/09/19 16:53:01 dds Exp $">
+  <meta name="Author" content="Diomidis Spinellis">
+  <meta http-equiv="Content-Language" content="en">
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <link rev="made" href="mailto:dds@aueb.gr">
+  <link rel="ToC" href="index.html">
+  <link rev="Subdocument" href="index.html">
+  <link rel="previous" href="./ver.html">
+  <link rel="next" href="./contr.html">
+  <style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+  </style><!-- LS-START -->
+  <script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+  </script><!-- LS-END --></a>
+</head><body>
+<h1>Frequently Asked Questions</h1>
+
+<!--
+
+To update the table of contents execute the following vim command from a register
+
+/^<h2>Contents
+
+jjma/ul>
+
+kmb/^$
+
+"qyy:g/^<a name/s,<a name="\([^>]*\)><h2>\(.*\)</h2></a>,<li> <a href="\#\1>\2</a><\/li>,|y Q|u
+
+'ad'b"qP
+
+-->
+<h2>Contents</h2>
+
+<ul>
+
+  <li> <a href="#varhand">The metrics calculated by the program do not
+agree with those I calculate by hand. How come?</a></li>
+  <li> <a href="#jdk14">How can I run the tool in a JDK 1.4
+environment?</a></li>
+  <li> <a href="#extdirs">I'm getting a ClassNotFoundException. How
+can I fix it?</a></li>
+  <li> <a href="#cite">I'm using ckjm to collect metrics for a
+research. How shall I cite it?</a> </li>
+</ul>
+
+<a name="varhand">
+<h2>The metrics calculated by the program do not agree with those I
+calculate by hand. How come?</h2>
+</a>The <em>ckjm</em> program calculates the metrics from the code
+appearing in the compiled bytecode files.
+The Java compiler optimizes away some elements of the code
+(for example <code>static final</code> fields, and these do not
+take part in the calculations.
+You may want to consult the disassembled code
+(using a command like <code>javap -c -private</code> to see
+what elements <em>ckjm</em> takes into account.
+<a name="jdk14">
+<h2>How can I run the tool in a JDK 1.4 environment?</h2>
+</a>You can use the open source tool <a href="http://retroweaver.sf.net">retroweaver</a>
+to create a backwards-compatible jar file.
+(Suggested by Paul King).
+<a name="extdirs">
+<h2>I'm getting a ClassNotFoundException. How can I fix it?</h2>
+</a>If you are getting messages like the one below, it means that <em>ckjm</em>
+can't locate the code for the corresponding classes, in order to
+properly
+calculate the depth of the inheritance tree (DIT) metric.
+<code>java.lang.ClassNotFoundException: Exception while looking for
+class
+javax.servlet.http.HttpServlet: java.io.IOException:
+Couldn't find: javax.servlet.http.HttpServlet.class
+</code>To solve this problem you must explicitly setup the
+<code>java.ext.dirs</code> property pointing to a directory containing
+the <em>jar</em> files where <em>ckjm</em> can locate those classes.
+Example:
+<code>java -Djava.ext.dirs=lib -jar ckjm-1.8.jar *.class
+</code><a name="#extdirs"> </a>
+<h2>
+<a name="cite">I'm using ckjm to collect metrics for a
+research. How shall I cite it?</a></h2>
+
+The extended version of ckjm was originally reported in: <br>
+Jureczko, M., Spinellis, D.: Using object-oriented design metrics to
+predict software defects. In: Proceedings of the 5th International
+Conference on Dependability of Computer Systems, pp. 69–81 (2010)<br>
+<br>
+@Inbook{Jur10,<br>
+&nbsp;author = {Jureczko, Marian and Spinellis, Diomidis},<br>
+&nbsp;title = {Using Object-Oriented Design Metrics to Predict Software Defects},<br>
+&nbsp;volume = {Models and Methodology of System Dependability},<br>
+&nbsp;series = {Monographs of System Dependability},<br>
+&nbsp;year = {2010},<br>
+&nbsp;isbn = {978-83-7493-526-5},<br>
+&nbsp;pages = {69-81},<br>
+&nbsp;publisher = {Oficyna Wydawnicza Politechniki Wroclawskiej},<br>
+&nbsp;address = {Wroclaw, Poland}<br>
+}<br>
+<br>
+
+<p>
+<table width="100%">
+  <tbody>
+    <tr>
+      <td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td>
+      <td class="navigate" align="right"><a href="./ver.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./contr.html" accesskey="N" id="next">Next (Contributors)&nbsp;»</a></td>
+    </tr>
+  </tbody>
+</table>
+</p>
+
+<hr>
+<p class="footer"><!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left"></a>&nbsp;Last change: July 23, 2009 5:33 pm
+<br>
+&nbsp;Unless otherwise expressly stated, all original material on this
+page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative
+Commons Attribution-Noncommercial-No Derivative Works 2.5 License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+	<Work rdf:about="">
+
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+
+	<dc:date>2006</dc:date>
+
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+
+	</Work>
+
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+
+</body></html>

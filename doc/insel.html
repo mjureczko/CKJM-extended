@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<title>Using Pipelines to Select Classes</title>
+
+<meta name="Generator" content="$Id: thread.pl 1.62 2006/09/19 16:53:01 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./oper.html" />
+<link rel="next" href="./outfmt.html" />
+
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style>
+<!-- LS-START --><script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+</script><!-- LS-END -->
+</head>
+<body>
+<h1>Using Pipelines to Select Classes</h1>
+Using the Unix <em>find</em> command to select the class files
+to process, provides infinite flexibility.
+<ul>
+<li>
+You can specify a range of modification times for the files.
+As an example, the following command will print the metrics of
+the class files modified during the last week.
+<pre>
+find build <font color="#6a5acd">-name</font> <font color="#804040"><b>'</b></font><font color="#ff00ff">*.class</font><font color="#804040"><b>'</b></font> <font color="#6a5acd">-mtime</font> <font color="#ff00ff">-7</font> <font color="#6a5acd">-print</font> <font color="#804040"><b>|</b></font> java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm.jar
+</pre>
+</li>
+<li>
+You can filter out specific patterns, either with the GNU
+<em>find</em>'s regular expression options, or by piping its results
+through <em>grep</em>.
+As an example, the following command will not print metrics for
+internal classes (their name contains a $ character).
+<pre>
+find build <font color="#6a5acd">-name</font> <font color="#804040"><b>'</b></font><font color="#ff00ff">*.class</font><font color="#804040"><b>'</b></font> <font color="#804040"><b>|</b></font> fgrep <font color="#6a5acd">-v</font> <font color="#804040"><b>'</b></font><font color="#ff00ff">$</font><font color="#804040"><b>'</b></font> <font color="#804040"><b>|</b></font> java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm.jar
+</pre>
+</li>
+<li>
+You process contents from several directories.
+As an example, the following command will process the class files
+located in the build and lib directories.
+<pre>
+find build lib <font color="#6a5acd">-name</font> <font color="#804040"><b>'</b></font><font color="#ff00ff">*.class</font><font color="#804040"><b>'</b></font> <font color="#6a5acd">-print</font> <font color="#804040"><b>|</b></font> java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm.jar
+</pre>
+</li>
+
+</ul>
+<p>
+<table width="100%"><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td align="right" class="navigate"><a href="./oper.html" accesskey="P" id="previous">&laquo;&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./outfmt.html" accesskey="N" id="next">Next (Using Pipelines to Format the Output)&nbsp;&raquo;</a></td></tr></table></p>
+
+
+<hr /> <p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img align="left" alt="Creative Commons License" style="border-width: 0" src="http://creativecommons.org/images/public/somerights20.png"/></a>
+&nbsp;Last change: July 22, 2009 5:09 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-Noncommercial-No Derivative Works 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body>
+</html>

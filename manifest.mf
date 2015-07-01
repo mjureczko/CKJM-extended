@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.6.5
+Main-Class: gr.spinellis.ckjm.MetricsFilter
+
+Name: org.apache.bcel
+Specification-Title: bcel
+Specification-Version: 5.1
+Specification-Vendor: Apache Software Foundation
+Implementation-Title: org.apache.bcel
+Implementation-Version: 5.1
+Implementation-Vendor: Apache Software Foundation
+
+Name: gr.spinellis.ckjm
+Specification-Title: ckjm - Chidamber Kemerer Java Metrics
+Specification-Version: 1.8.x
+Specification-Vendor: Diomidis Spinellis, Marian Jureczko
+Implementation-Title: gr.spinellis.ckjm
+Implementation-Version: 1.8.x
+Implementation-Vendor: Diomidis Spinellis, Marian Jureczko

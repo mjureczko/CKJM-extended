@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Introduction</title>
+
+
+
+
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="next" href="./oper.html" />
+
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080;  }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style><!-- LS-START -->
+<script language="vbscript">
+sub document_onKeyDown()
+   keypressed = window.event.keyCode
+   select case keypressed
+     case 78 'ALT-B
+        document.all("next").click
+     case 80 'ALT-P
+        document.all("previous").click
+     case 67 'ALT-C
+        document.all("contents").click
+   end select
+end sub
+</script><!-- LS-END --></head><body>
+<h1>Introduction</h1>
+<p>
+The program <em>CKJM extended</em> calculates nineteen size and structure software
+metrics by processing the bytecode of compiled Java files.
+The program calculates for each class the following metrics, and displays
+them on its standard output or saves in file, following the class's name:
+</p>
+<ul>
+<li>WMC: Weighted methods per class (NOM: Number of Methods in the QMOOD metric suite)</li>
+<li>DIT: Depth of Inheritance Tree</li>
+<li>NOC: Number of Children</li>
+<li>CBO: Coupling between object classes</li>
+<li>RFC: Response for a Class</li>
+<li>LCOM: Lack of cohesion in methods</li>
+<li>Ca: Afferent coupling (not a C&amp;K metric)</li>
+<li>Ce: Efferent coupling (not a C&amp;K metric)</li>
+<li>NPM: Number of Public Methods for a class (not a C&amp;K metric; CIS: Class Interface Size in the QMOOD metric suite)</li>
+<li>LCOM3: Lack of cohesion in methods Henderson-Sellers version</li>
+<li>LCO: Lines of Code (not a C&amp;K metric)</li>
+<li>DAM: Data Access Metric (QMOOD metric suite)</li>
+<li>MOA: Measure of Aggregation (QMOOD metric suite)</li>
+<li>MFA: Measure of Functional Abstraction (QMOOD metric suite)</li>
+<li>CAM: Cohesion Among Methods of Class (QMOOD metric suite)</li>
+<li>IC: Inheritance Coupling (quality oriented extension to C&amp;ampK metric suite)</li>
+<li>CBM: Coupling Between Methods (quality oriented extension to C&amp;ampK metric suite)</li>
+<li>AMC: Average Method Complexity (quality oriented extension to C&amp;ampK metric suite)</li>
+<li>CC: McCabe's Cyclomatic Complexity</li>
+</ul>
+<p>
+This program has been initially written as an extended version of <a href="http://www.spinellis.gr/sw/ckjm">ckjm 1.8</a>.
+It was extended through increasing the number of software metrics that it calculates.
+The initial version of ckjm extended is 2.0. 
+It was written on top of the <a href="http://www.spinellis.gr/sw/ckjm">ckjm 1.8</a> and to some extent it is a next version of the ckjm.
+Therefore, the versions count starts from 2.0.  
+</p>
+<p>
+To run the program you simply specify the class files (or jar files)
+on its command line or standard input.
+The program will produce on its standard output a line for each class
+containing the complete name of the class and the values of the corresponding
+class metrics. Ckjm can be use as an ant task too (where offers a xml output).
+This operation model allows the tool to be easilly extended using textual
+pre and post processors.
+</p>
+<p>
+</p><table width="100%"><tbody><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td class="navigate" align="right">&nbsp;&nbsp;&nbsp;&nbsp;<a href="./oper.html" accesskey="N" id="next">Next (Operation)&nbsp;»</a></td></tr></tbody></table>
+
+
+<hr /> <p class="footer">
+<!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left" /></a>
+&nbsp;Last change: May 06, 2011 5:48 pm
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative Commons Attribution-Noncommercial-No Derivative Works 2.5  License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" />
+	<dc:date>2006</dc:date>
+	<dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights>
+	<dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body></html>

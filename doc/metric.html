@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><title>Metric Descriptions</title>
+
+
+<meta name="Generator" content="$Id: thread.pl 1.62 2006/09/19 16:53:01 dds Exp $" />
+<meta name="Author" content="Diomidis Spinellis" />
+<meta http-equiv="Content-Language" content="en" />
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:dds@aueb.gr" />
+<link rel="ToC" href="index.html" />
+<link rev="Subdocument" href="index.html" />
+<link rel="previous" href="./outfmt.html" />
+<link rel="next" href="./detail.html" />
+<style type="text/css">
+p.footer {font-size: 70%}
+pre { padding:4px; background-color: #eeeeee; border: 1px solid #000080; }
+p.footer { FONT-FAMILY: tahoma; FONT-SIZE: 70%; COLOR: #505050; MARGIN-TOP: 0px; }
+h1 { background-color: #ffff99; border-left: #a0a0a0 10px solid; padding: 1px 4px 1px 15px; }
+hr { height: 1px; margin-top:1em; }
+</style><!-- LS-START -->
+<script language="vbscript">
+sub document_onKeyDown()
+keypressed = window.event.keyCode
+select case keypressed
+case 78 'ALT-B
+document.all("next").click
+case 80 'ALT-P
+document.all("previous").click
+case 67 'ALT-C
+document.all("contents").click
+end select
+end sub
+</script><!-- LS-END --></head><body>
+<h1>Metric Descriptions</h1>
+The metrics <em>ckjm</em> will calculate and display for
+each class are the following.
+<dl>
+<dt>WMC - Weighted methods per class</dt>
+<dd>A class's <em>weighted methods per class</em>
+WMC
+metric is simply the sum of the complexities of its methods.
+As a measure of complexity we can use the cyclomatic complexity,
+or we can abritrarily assign a complexity value of 1 to each method.
+The <em>ckjm</em> program assigns a complexity value of 1
+to each method,
+and therefore the value of the WMC is equal to the number of methods
+in the class.
+</dd>
+<dt>DIT - Depth of Inheritance Tree</dt>
+<dd>The <em>depth of inheritance tree</em> (DIT)
+metric provides
+for each class a measure of the inheritance levels from the object
+hierarchy top.
+In Java where all classes inherit Object the minimum value
+of DIT is 1.
+</dd>
+<dt>NOC - Number of Children</dt>
+<dd>A class's <em>number of children</em> (NOC)
+metric simply
+measures the number of immediate descendants of the class.
+</dd>
+<dt>CBO - Coupling between object classes</dt>
+<dd>The <em>coupling between object classes</em>
+(CBO)
+metric represents the number of classes coupled to a given
+class (efferent couplings and afferent couplings).
+This coupling can occur through method calls,
+field accesses, inheritance, arguments, return types,
+and exceptions.
+</dd>
+<dt>RFC - Response for a Class</dt>
+<dd>The metric called the <em>response for a class</em>
+(RFC)
+measures the number of different
+methods that can be executed when an object of that
+class receives a message (when a method is invoked
+for that object).
+Ideally, we would want to find for each method
+of the class, the methods that class will call,
+and repeat this for each called method,
+calculating what is called the <em>transitive closure</em>
+of the method's call graph.
+This process can however be both expensive and quite
+inaccurate.
+In <em>ckjm</em>,
+we calculate a rough
+approximation to the response set
+by simply inspecting method calls within the class's
+method bodies. The value of RFC is the sum of number of methods called
+within the class's method bodies and the number of class's methods.
+This simplification was also used in the 1994 Chidamber and Kemerer
+description of the metrics.
+</dd>
+<dt>LCOM - Lack of cohesion in methods</dt>
+<dd>A class's <em>lack of cohesion in methods</em>
+(LCOM)
+metric counts the sets of methods in a class that are not related
+through the sharing of some of the class's fields.
+The original definition of this metric
+(which is the one used in <em>ckjm</em>)
+considers all pairs of a class's methods.
+In some of these pairs both methods access at
+least one common field of the class, while in
+other pairs the two methods to not share any
+common field accesses.
+The lack of cohesion in methods is then calculated
+by subtracting from the number of method pairs
+that don't share a field access the number of
+method pairs that do.
+Note that subsequent definitions
+of this metric used as a measurement basis the number
+of disjoint graph components of the class's methods.
+Others modified the definition of connectedness to
+include calls between the methods of the class.
+The program <em>ckjm</em> follows the original (1994)
+definition
+by Chidamber and Kemerer.
+</dd>
+<dt>Ca - Afferent couplings</dt>
+<dd>A class's afferent couplings is a measure of how many other
+classes
+use the specific class.
+Coupling has the same definition in context of Ca as that used for
+calculating CBO.
+</dd>
+<dt>Ce - Efferent couplings</dt>
+<dd>A class's efferent couplings is a measure of how many other
+classes is used by the specific class.
+Coupling has the same definition in context of Ce as that used for
+calculating CBO.
+</dd>
+<dt>NPM - Number of Public Methods</dt>
+<dd>The NPM metric simply counts all the methods in a class
+that
+are declared as public.
+It can be used to measure the size of an API provided by a package.</dd>
+<dt>LCOM3 -Lack of cohesion in methods.</dt> 
+<dd>LCOM3 varies between 0 and 2.</dd>
+<dd>m - number of procedures (methods) in class</dd>
+<dd>a - number of variables (attributes in class</dd>
+<dd>µ(A) -&nbsp;number of methods that access a variable
+(attribute)</dd>
+<dd><img style="width: 195px; height: 75px;" alt="" src="lcom3.png" /></dd>
+<dd>The constructors and static initializations are taking into accounts as separately methods.</dd>
+<dt>LOC - Lines of Code.</dt>
+<dd>The lines are counted from java binary code and it is the sum of
+number of fields, number of methods and number of instructions in every
+method of given class.</dd>
+<dt>DAM: Data Access Metric</dt>
+<dd>This metric is the ratio of the number of private (protected)
+attributes to the total number of attributes declared in the class. A
+high value for DAM is desired. (Range 0 to 1)</dd>
+<dt>MOA: Measure of Aggregation</dt>
+<dd>This metric measures the extent of the part-whole relationship,
+realized by using attributes. The metric is a count of the number of
+data declarations (class fields) whose types are user defined classes.</dd>
+<dt>MFA: Measure of Functional Abstraction</dt>
+<dd>This metric is the ratio of the number of methods inherited by a
+class to the total number of methods accessible by member methods of
+the class. The constructors and the java.lang.Object (as parent) are
+ignored. (Range 0 to 1) </dd>
+<dt>CAM: Cohesion Among Methods of Class</dt>
+<dd>This metric computes the relatedness among methods of a class based
+upon the parameter list of the methods. The metric is computed using
+the summation of number of different types of method parameters in
+every method divided by a multiplication of number of different method
+parameter types in whole class and number of methods. A metric value
+close to 1.0 is preferred. (Range 0 to 1).</dd>
+<dt>IC: Inheritance Coupling</dt>
+<dd>This metric provides the number of parent classes to which a given class is coupled.
+A class is coupled to its parent class if one of its inherited methods functionally dependent
+on the new or redefined methods in the class. A class is coupled to its parent class if one
+of the following conditions is satisfied:
+<li>One of its inherited methods uses a variable (or data member) that is defined in a new/redefined method.</li>
+<li>One of its inherited methods calls a redefined method.</li>
+<li>One of its inherited methods is called by a redefined method and uses a parameter that is defined in the redefined method.</li></dd>
+<dt>CBM: Coupling Between Methods</dt>
+<dd>The metric measure the total number of new/redefined methods to which at least one of the inherited
+methods is coupled. There is a coupling when one of the given in the IC metric definition
+conditions holds.</dd>
+<dt>AMC: Average Method Complexity</dt>
+<dd>This metric measures the average method size for each class. Size of a method is equal
+to the number of java binary codes in the method.</dd>
+<dt>CC - The McCabe's cyclomatic complexity</dt>
+<dd>It is equal to number of
+different paths in a method (function) plus one. The cyclomatic
+complexity is
+defined as:</dd>
+<dd>CC = E - N + P</dd>
+<dd>where</dd>
+<dd>E - the number of edges of the graph</dd>
+<dd>N - the number of nodes of the graph</dd>
+<dd>P - the number of connected components</dd>
+</dl>
+<dl>
+</dl>
+<table width="100%">
+<tbody>
+<tr>
+<td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td>
+<td class="navigate" align="right"><a href="./outfmt.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./detail.html" accesskey="N" id="next">Next
+(Measurement Details)&nbsp;»</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p class="footer"><!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left" /></a>&nbsp;Last change:
+July 22, 2009 5:29 am
+<br />
+&nbsp;Unless otherwise expressly stated, all original material on
+this page
+created by Diomidis Spinellis or Marian Jureczko is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/">Creative
+Commons Attribution-Noncommercial-No Derivative Works 2.5 License</a>.<!--/Creative Commons License--><!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <Work rdf:about=""> <license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/2.5/" /> <dc:date>2006</dc:date> <dc:rights><Agent><dc:title>Diomidis Spinellis</dc:title></Agent></dc:rights> <dc:type rdf:resource="http://purl.org/dc/dcmitype/Text" /> </Work> <License rdf:about="http://creativecommons.org/licenses/by-nc-nd/2.5/"><permits rdf:resource="http://web.resource.org/cc/Reproduction"/><permits rdf:resource="http://web.resource.org/cc/Distribution"/><requires rdf:resource="http://web.resource.org/cc/Notice"/><requires rdf:resource="http://web.resource.org/cc/Attribution"/><prohibits rdf:resource="http://web.resource.org/cc/CommercialUse"/></License></rdf:RDF> -->
+</p>
+</body></html>
