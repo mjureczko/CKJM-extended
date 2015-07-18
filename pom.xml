@@ -14,7 +14,7 @@
     <artifactId>ckjm_ext</artifactId>
     <packaging>jar</packaging>
     <name>ckjm_ext</name>
-    <version>2.1.1</version>
+    <version>2.2-SNAPSHOT</version>
     <description>CKJM extended - An extended version of Tool for Calculating Chidamber and Kemerer Java Metrics (and many other metrics)</description>
     <url>http://gromit.iiar.pwr.wroc.pl/p_inf/ckjm/</url>
     <licenses>
