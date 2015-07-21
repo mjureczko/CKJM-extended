@@ -7,6 +7,8 @@
 package gr.spinellis.ckjm;
 
 import junit.framework.TestCase;
+
+import java.io.File;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  */
 public class CkjmBeanTest extends TestCase {
 
+    private static final char LIB_SEPARATOR = File.pathSeparatorChar;
     private ClassMetrics mMetrics;
     private String mName;
     private CkjmBean mCkjm = null;
@@ -62,7 +65,7 @@ public class CkjmBeanTest extends TestCase {
     public void testManyClasses() {
 
 
-        mCkjm.countMetrics(mPath2TestClass1 + ":" + mPath2TestClass2 + ":" + mPath2TestClass3 + ":" + mPath2TestClass4, mHandle);
+        mCkjm.countMetrics(mPath2TestClass1 + LIB_SEPARATOR + mPath2TestClass2 + LIB_SEPARATOR + mPath2TestClass3 +LIB_SEPARATOR + mPath2TestClass4, mHandle);
 
         ClassMetrics cm;
         List<String> methodNames;
