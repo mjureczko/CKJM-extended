@@ -116,6 +116,7 @@
                                     <mainClass>gr.spinellis.ckjm.MetricsFilter</mainClass>
                                 </transformer>
                             </transformers>
+                            <finalName>runable-ckjm_ext-${project.version}</finalName>
                         </configuration>
                     </execution>
                 </executions>
