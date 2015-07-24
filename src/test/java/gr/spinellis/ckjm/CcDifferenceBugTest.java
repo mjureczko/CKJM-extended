@@ -1,6 +1,7 @@
 package gr.spinellis.ckjm;
 
 import gr.spinellis.ckjm.ant.PrintXmlResults;
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  * Created by marian on 20/07/15.
  * Defect Report https://github.com/mjureczko/CKJM-extended/issues/3
  */
-public class CcDifferenceBug {
+public class CcDifferenceBugTest {
 
     @Test
     public void testXmlOutputForCC() {
