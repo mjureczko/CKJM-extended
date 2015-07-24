@@ -70,18 +70,17 @@ public class PrintXmlResults implements CkjmOutputHandler {
     }
 
     private String printXmlCC(ClassMetrics cm) {
-        StringBuffer xmlCC = new StringBuffer();
+        StringBuilder xmlCC = new StringBuilder();
         List<String> methodNames = cm.getMethodNames();
         Iterator<String> itr = methodNames.iterator();
         String name;
 
-        xmlCC.append("\t\t<cc>" + endl);
+        xmlCC.append("\t\t<cc>").append(endl);
         while (itr.hasNext()) {
             name = itr.next();
-            name = name.replaceAll("<|>", "_");
-            xmlCC.append("\t\t\t<method name=\"" + name + "\">");
+            xmlCC.append(String.format("\t\t\t<method name=\"%s\">", name.replaceAll("<|>", "_")));
             xmlCC.append(cm.getCC(name));
-            xmlCC.append("</method>" + endl);
+            xmlCC.append("</method>").append(endl);
         }
         xmlCC.append("\t\t</cc>");
 

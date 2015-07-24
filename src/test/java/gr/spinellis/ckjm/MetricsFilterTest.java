@@ -110,7 +110,7 @@ public class MetricsFilterTest {
             "\t\t<cbm>0</cbm>",
             "\t\t<amc>37.0</amc>",
             "\t\t<cc>",
-            "\t\t\t<method name=\"public void _init_()\">0</method>",
+            "\t\t\t<method name=\"public void _init_()\">1</method>",
             "\t\t\t<method name=\"void m2(String name, java.util.List list, String c)\">6</method>",
             "\t\t\t<method name=\"void m1()\">7</method>",
             "\t\t</cc>",
