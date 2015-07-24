@@ -86,8 +86,11 @@ processing.
 Example:
 </p>
 <pre>java <font color="#6a5acd">-jar</font> /usr/local/lib/ckjm_ext.jar -x build/classes/gr/spinellis/ckjm/*.class<br /></pre>
-<p><br />
-
+<p>
+    Please note that the program may report a ClassNotFoundException.
+    It usually happens when the investigated classes depends on some libraries.
+    In order to solve the issue, the dependencies should be added to the classpath.
+    Detailed guide regarding classpath configuration is available <a href="http://javarevisited.blogspot.com/2011/01/how-classpath-work-in-java.html">here</a>.
 </p>
     
 <table width="100%"><tbody><tr><td class="navigate"><a href="index.html" accesskey="C" id="contents">Contents</a> </td><td class="navigate" align="right"><a href="./intro.html" accesskey="P" id="previous">«&nbsp;Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="./insel.html" accesskey="N" id="next">Next (Using Pipelines to Select Classes)&nbsp;»</a></td></tr></tbody></table>
@@ -95,7 +98,7 @@ Example:
 
 <hr /> <p class="footer">
 <!--Creative Commons License--><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/"><img alt="Creative Commons License" style="border-width: 0pt;" src="http://creativecommons.org/images/public/somerights20.png" align="left" /></a>
-&nbsp;Last change: Jul 23, 2011 12:11 am
+&nbsp;Last change: Jul 24, 2015 7:21 pm
 <br />
 &nbsp;Unless otherwise expressly stated, all original material on this page
 created by Diomidis Spinellis or Marian Jureczko is licensed under a
