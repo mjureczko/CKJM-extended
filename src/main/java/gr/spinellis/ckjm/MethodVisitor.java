@@ -17,7 +17,8 @@
 package gr.spinellis.ckjm;
 
 import org.apache.bcel.generic.*;
-import org.apache.bcel.Constants;
+import org.apache.bcel.Const;
+import org.apache.bcel.classfile.Utility;
 
 
 /**
@@ -47,7 +48,7 @@ class MethodVisitor extends EmptyVisitor {
         cv = c;
         cp  = mg.getConstantPool();
         cm = cv.getMetrics();
-        cm.addMethod(mg.toString(), 1);
+        cm.addMethod(getMethodSignature(mg), 1);
     }
 
     /** Start the method's visit. */
@@ -78,7 +79,7 @@ class MethodVisitor extends EmptyVisitor {
     public void visitBranchInstruction(BranchInstruction obj) 
     {
         String instruction = obj.toString();
-        String method=mg.toString();
+        String method=getMethodSignature(mg);
         int oldValue = cm.getCC(method);
         
         if( instruction.contains( "lookupswitch") ) //if switch-case construction
@@ -96,11 +97,25 @@ class MethodVisitor extends EmptyVisitor {
         
         
     }
-    
-    /** Local variable use. */
+
+    /**
+     * Copied from https://github.com/apache/commons-bcel/blob/BCEL_5_1/src/java/org/apache/bcel/generic/MethodGen.java#L945
+     * @param mg
+     * @return
+     */
+	private static String getMethodSignature(MethodGen mg) {
+		String access = Utility.accessToString(mg.getAccessFlags());
+		String signature = Type.getMethodSignature(mg.getType(), mg.getArgumentTypes());
+
+		signature = Utility.methodSignatureToString(signature, mg.getName(), access, true,
+				mg.getLocalVariableTable(mg.getConstantPool()));
+		return signature;
+	}
+
+	/** Local variable use. */
     @Override
     public void visitLocalVariableInstruction(LocalVariableInstruction i) {
-        if(i.getOpcode() != Constants.IINC)
+        if(i.getOpcode() != Const.IINC)
             cv.registerCoupling(i.getType(cp));
     }
 
