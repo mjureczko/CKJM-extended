@@ -45,6 +45,8 @@ public class MfaClassVisitor extends AbstractClassVisitor {
 
     @Override
     protected void visitJavaClass_body(JavaClass jc) {
+	    double result = Double.NaN;
+	    try {
         JavaClass parent = jc.getSuperClass();
 
         double pNumOfMeth=0;
@@ -55,14 +57,15 @@ public class MfaClassVisitor extends AbstractClassVisitor {
 
         double cNumOfMeth = getNumOfMethods( jc );
 
-        double result;
         if( cNumOfMeth+pNumOfMeth == 0 ){
             result = 0;
         }
         else{
             result = pNumOfMeth / (cNumOfMeth + pNumOfMeth);
         }
-        
+	    } catch (Exception e) {
+		    e.printStackTrace();
+	    }
         mClassMetrics.setMfa(result);
     }
 }

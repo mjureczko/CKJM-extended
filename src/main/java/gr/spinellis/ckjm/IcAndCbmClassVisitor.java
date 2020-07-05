@@ -62,6 +62,7 @@ public class IcAndCbmClassVisitor extends AbstractClassVisitor {
     protected void visitJavaClass_body(JavaClass jc) {
         mCase1 = mCase2 = mCase3 = 0;
         mCurrentClass = jc;
+	try {
         mParents = jc.getSuperClasses();
         mParentsMethods = new ArrayList<Method[]>();
         mMethods = jc.getMethods();
@@ -91,6 +92,9 @@ public class IcAndCbmClassVisitor extends AbstractClassVisitor {
         countCase2(); //TODO: remove duplications
         countCase3();
         saveResults();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
     }
 
     /**
