@@ -107,8 +107,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         try {
 			mClassMetrics.setDit(jc.getSuperClasses().length);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalArgumentException(e);
 		}
         registerCoupling(super_name);
 

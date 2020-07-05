@@ -58,44 +58,45 @@ public class IcAndCbmClassVisitor extends AbstractClassVisitor {
         super(classMap);
     }
 
-    @Override
-    protected void visitJavaClass_body(JavaClass jc) {
-        mCase1 = mCase2 = mCase3 = 0;
-        mCurrentClass = jc;
-	try {
-        mParents = jc.getSuperClasses();
-        mParentsMethods = new ArrayList<Method[]>();
-        mMethods = jc.getMethods();
-        mInvokationsFromParents = new TreeSet<MethodInvokation>();
-        mInvoktionsFromCurrentClass = new TreeSet<MethodInvokation>();
-        mParentsReaders = new TreeSet<FieldAccess>();
-        mCurrentClassSetters = new TreeSet<FieldAccess>();
-        mMethodCouplings = new TreeSet<MethodCoupling>();
+	@Override
+	protected void visitJavaClass_body(JavaClass jc) {
+		mCase1 = mCase2 = mCase3 = 0;
+		mCurrentClass = jc;
+		try {
+			mParents = jc.getSuperClasses();
+			mParentsMethods = new ArrayList<Method[]>();
+			mMethods = jc.getMethods();
+			mInvokationsFromParents = new TreeSet<MethodInvokation>();
+			mInvoktionsFromCurrentClass = new TreeSet<MethodInvokation>();
+			mParentsReaders = new TreeSet<FieldAccess>();
+			mCurrentClassSetters = new TreeSet<FieldAccess>();
+			mMethodCouplings = new TreeSet<MethodCoupling>();
 
-        for (JavaClass j : mParents) {
-            mParentPool = new ConstantPoolGen(j.getConstantPool());
-            mParent = j;
-            mParentsMethods.add(j.getMethods());
-            for (Method m : j.getMethods()) {
-                m.accept(this);
-            }
-        }
+			for (JavaClass j : mParents) {
+				mParentPool = new ConstantPoolGen(j.getConstantPool());
+				mParent = j;
+				mParentsMethods.add(j.getMethods());
+				for (Method m : j.getMethods()) {
+					m.accept(this);
+				}
+			}
 
-        for (Method m : mMethods) {
-            if (hasBeenDefinedInParentToo(m)) {
-                investigateMethod(m);
-            }
-            investigateMethodAndLookForSetters(m);
-        }
+			for (Method m : mMethods) {
+				if (hasBeenDefinedInParentToo(m)) {
+					investigateMethod(m);
+				}
+				investigateMethodAndLookForSetters(m);
+			}
 
-        countCase1();
-        countCase2(); //TODO: remove duplications
-        countCase3();
-        saveResults();
-	} catch (Exception e) {
-		e.printStackTrace();
+			countCase1();
+			countCase2(); // TODO: remove duplications
+			countCase3();
+			saveResults();
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException(e);
+
+		}
 	}
-    }
 
     /**
      * It is used to visit methods of parents of investigated class.

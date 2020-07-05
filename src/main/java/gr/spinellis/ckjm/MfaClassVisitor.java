@@ -43,29 +43,28 @@ public class MfaClassVisitor extends AbstractClassVisitor {
         return methods.length - howManyIgnore(methods);
     }
 
-    @Override
-    protected void visitJavaClass_body(JavaClass jc) {
-	    double result = Double.NaN;
-	    try {
-        JavaClass parent = jc.getSuperClass();
+	@Override
+	protected void visitJavaClass_body(JavaClass jc) {
+		double result = Double.NaN;
+		try {
+			JavaClass parent = jc.getSuperClass();
 
-        double pNumOfMeth=0;
-        JavaClass parents[] = jc.getSuperClasses();
-        for( JavaClass p : parents ){
-            pNumOfMeth += getNumOfMethods(p);
-        }
+			double pNumOfMeth = 0;
+			JavaClass parents[] = jc.getSuperClasses();
+			for (JavaClass p : parents) {
+				pNumOfMeth += getNumOfMethods(p);
+			}
 
-        double cNumOfMeth = getNumOfMethods( jc );
+			double cNumOfMeth = getNumOfMethods(jc);
 
-        if( cNumOfMeth+pNumOfMeth == 0 ){
-            result = 0;
-        }
-        else{
-            result = pNumOfMeth / (cNumOfMeth + pNumOfMeth);
-        }
-	    } catch (Exception e) {
-		    e.printStackTrace();
-	    }
-        mClassMetrics.setMfa(result);
-    }
+			if (cNumOfMeth + pNumOfMeth == 0) {
+				result = 0;
+			} else {
+				result = pNumOfMeth / (cNumOfMeth + pNumOfMeth);
+			}
+		} catch (ClassNotFoundException e) {
+			throw new IllegalArgumentException(e);
+		}
+		mClassMetrics.setMfa(result);
+	}
 }
