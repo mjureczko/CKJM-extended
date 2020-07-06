@@ -27,7 +27,7 @@
     <scm>
         <url>scm:git:git@github.com:mjureczko/CKJM-extended.git</url>
         <connection>scm:git:git@github.com:mjureczko/CKJM-extended.git</connection>
-        <developerConnection>scm:git:ssh@github.com:mjureczko/CKJM-extended.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:mjureczko/CKJM-extended.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <dependencies>
