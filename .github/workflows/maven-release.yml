@@ -17,11 +17,6 @@ jobs:
           gpg_private_key: ${{ secrets.gpg_private_key }}
           test: test234
         run: |
-          echo $gpg_private_key > tmp.key
-          echo $test
-          echo "SSSSSSSS"
-          head tmp.key
-          echo "SSSSSSSS"
-          gpg --import tmp.key
+          printf "%s" "$gpg_private_key" | gpg --import tmp.key
       - name: Release with nexus-staging-maven-plugin
         run: mvn -B -P release deploy --file pom.xml
