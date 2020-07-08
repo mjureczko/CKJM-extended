@@ -15,8 +15,10 @@ jobs:
       - shell: bash
         env:
           gpg_private_key: ${{ secrets.gpg_private_key }}
+          test: test234
         run: |
           echo $gpg_private_key > tmp.key
+          echo $test
           echo "SSSSSSSS"
           head tmp.key
           echo "SSSSSSSS"
