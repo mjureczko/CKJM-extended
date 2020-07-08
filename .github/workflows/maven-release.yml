@@ -16,6 +16,8 @@ jobs:
         env:
           gpg_private_key: ${{ secrets.gpg_private_key }}
         run: |
-          echo $gpg_private_key | gpg --import
+          echo $gpg_private_key > tmp.key
+          head tmp.key
+          gpg --import tmp.key
       - name: Release with nexus-staging-maven-plugin
         run: mvn -B -P release deploy --file pom.xml
