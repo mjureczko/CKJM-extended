@@ -13,6 +13,6 @@ jobs:
         with:
           java-version: 1.8
       - name: Import gpg key
-        run: echo $gpg_key | gpg --import
+        run: echo $GPG_PRIVATE_KEY | gpg --import
       - name: Release with nexus-staging-maven-plugin
         run: mvn -B -P release deploy --file pom.xml
