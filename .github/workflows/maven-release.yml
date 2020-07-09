@@ -21,4 +21,4 @@ jobs:
           gpg --version
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
       - name: Release with nexus-staging-maven-plugin
-        run: mvn -B -P release deploy --file pom.xml
+        run: mvn -X -B -P release deploy --file pom.xml
