@@ -20,7 +20,5 @@ jobs:
           uname -a
           gpg --version
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
-          ls -lh ~/.gnupg
-          cat ~/.gnupg/gpg.conf
       - name: Release with nexus-staging-maven-plugin
         run: mvn -B -P release deploy --file pom.xml
