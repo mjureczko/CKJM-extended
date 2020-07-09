@@ -156,7 +156,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -166,6 +166,10 @@
                                 </goals>
                                 <configuration>
                                     <keyname>A2F1B1013E67518D524D4596EF85FA84073A2034</keyname>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>     
                                 </configuration>
                             </execution>
                         </executions>
