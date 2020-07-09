@@ -15,10 +15,10 @@ jobs:
       - shell: bash
         env:
           gpg_private_key: ${{ secrets.gpg_private_key }}
-          test: test234
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          OSSRH_LOGIN: ${{ secrets.OSSRH_LOGIN }}
+          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
         run: |
-          uname -a
-          gpg --version
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
       - name: Release with nexus-staging-maven-plugin
-        run: mvn -X -B -P release deploy --file pom.xml
+        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
