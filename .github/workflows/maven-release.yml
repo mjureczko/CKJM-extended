@@ -14,11 +14,14 @@ jobs:
           java-version: 1.8
       - shell: bash
         env:
+          gpg_passphrase: ${{ secrets.gpg_passphrase }}
           gpg_private_key: ${{ secrets.gpg_private_key }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          OSSRH_LOGIN: ${{ secrets.OSSRH_LOGIN }}
-          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
+          ossrh_login: ${{ secrets.ossrh_login }}
+          ossrh_pass: ${{ secrets.ossrh_pass }}
         run: |
+          echo "a: ${#$gpg_private_key}"
+          echo "b: ${#$GPG_PASSPHRASE}"
+          echo "c: ${#$gpg_passphrase}"
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
       - name: Release with nexus-staging-maven-plugin
         run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml

@@ -6,8 +6,8 @@
     <servers>
         <server>
             <id>ossrh</id>
-            <username>${env.OSSRH_LOGIN}</username>
-            <password>${env.OSSRH_PASS}</password>
+            <username>${env.ossrh_login}</username>
+            <password>${env.ossrh_pass}</password>
         </server>
     </servers>
 
@@ -15,7 +15,7 @@
         <profile>
             <id>release</id>
             <properties>
-                <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
+                <gpg.passphrase>${env.gpg_passphrase}</gpg.passphrase>
             </properties>
         </profile>
     </profiles>
