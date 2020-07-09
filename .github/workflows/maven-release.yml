@@ -24,4 +24,4 @@ jobs:
           echo "c: ${#gpg_passphrase}"
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
       - name: Release with nexus-staging-maven-plugin
-        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
+        run: mvn -B -s .mvn/settings.xml -P release deploy -Dgpg_passphrase=$gpg_passphrase --file pom.xml
