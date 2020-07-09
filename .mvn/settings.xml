@@ -15,7 +15,7 @@
         <profile>
             <id>release</id>
             <properties>
-                <gpg.passphrase>${gpg_passphrase}</gpg.passphrase>
+                <gpg.passphrase>${env.gpg_passphrase}</gpg.passphrase>
             </properties>
         </profile>
     </profiles>
