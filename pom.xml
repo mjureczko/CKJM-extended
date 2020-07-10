@@ -23,6 +23,13 @@
         <developerConnection>scm:git:git@github.com:mjureczko/CKJM-extended.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+    <developers>
+        <developer>
+            <name>Marian Jureczko</name>
+            <email>marian.jureczko@gmail.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.bcel</groupId>
