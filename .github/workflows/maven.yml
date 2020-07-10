@@ -3,7 +3,7 @@ name: Test
 on:
   push:
     branches: 
-    - 'test**'
+    - '**'
   pull_request:
     branches: [ master ]
 

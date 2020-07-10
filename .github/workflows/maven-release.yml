@@ -14,7 +14,7 @@ jobs:
           java-version: 1.8
       - shell: bash
         env:
-          gpg_passphrase: ${{ secrets.gpg_passphrase }}
+          gpg_private_key: ${{ secrets.gpg_private_key }}
         run: |
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
       - name: Release with nexus-staging-maven-plugin
