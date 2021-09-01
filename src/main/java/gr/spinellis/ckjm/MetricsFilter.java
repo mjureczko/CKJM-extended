@@ -58,7 +58,9 @@ public class MetricsFilter implements ICountingProperities {
      * The same instance of MoaClassVisitor must be used to process all class, so it must be a class field.
      */
     private MoaClassVisitor mMoaVisitor;
-    /**      */
+    /**
+     *
+     */
     private IClassMetricsContainer mMetricsContainer;
 
     public MetricsFilter() {
