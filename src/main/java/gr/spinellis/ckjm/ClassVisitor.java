@@ -105,10 +105,10 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
 
         pm.incNoc();
         try {
-			mClassMetrics.setDit(jc.getSuperClasses().length);
-		} catch (ClassNotFoundException e) {
-			throw new IllegalArgumentException(e);
-		}
+            mClassMetrics.setDit(jc.getSuperClasses().length);
+        } catch( ClassNotFoundException ex) {
+            System.err.println("Error obtaining all superclasses of " + jc);
+        }
         registerCoupling(super_name);
 
         String ifs[] = jc.getInterfaceNames();
@@ -336,8 +336,7 @@ public class ClassVisitor extends org.apache.bcel.classfile.EmptyVisitor {
         ArrayList<TreeSetWithId<String>> mFieldsUsedByMethods;
                
         /**
-         * Constructor
-         * @param treeWithFields Set of field names that are used direct by the method.
+         * @param ts Set of field names that are used direct by the method.
          * @param method Method name. LCOM3 is caunted for this method.
          */
         Lcom3Counter( TreeSet<String> ts, String method, ArrayList<TreeSetWithId<String>> fieldsUsedByMethods )

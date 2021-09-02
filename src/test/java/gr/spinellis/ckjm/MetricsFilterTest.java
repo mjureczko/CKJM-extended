@@ -5,16 +5,14 @@
 
 package gr.spinellis.ckjm;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,14 +24,24 @@ import static org.junit.Assert.*;
  */
 public class MetricsFilterTest {
 
-    public MetricsFilterTest() {
+    @Test
+    public void testFromCkjm() throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        final AtomicReference<ClassMetrics> ref = new AtomicReference<>();
+        CkjmOutputHandler outputHandler = new CkjmOutputHandler() {
+            @Override
+            public void handleClass(String name, ClassMetrics c) {
+                System.out.println("name: " + name + ", WMC: " + c.getWmc());
+                ref.set(c);
+                latch.countDown();
+            }
+        };
+        File f = new File("target/classes/gr/spinellis/ckjm/MetricsFilter.class");
+        assertTrue("File " + f.getAbsolutePath() + " not present", f.exists());
+        MetricsFilter.runMetrics(new String[] { f.getAbsolutePath() }, outputHandler, false);
+        latch.await(1, TimeUnit.SECONDS);
+        assertEquals(8, ref.get().getWmc());
     }
-
-
-    @Before
-    public void setUp() {
-    }
-
 
 
     /**
