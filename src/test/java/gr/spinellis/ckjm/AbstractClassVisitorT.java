@@ -5,13 +5,14 @@
 
 package gr.spinellis.ckjm;
 
-import java.io.File;
-import java.io.IOException;
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
-import org.junit.Before;
-import org.junit.Test;
-import static org.easymock.EasyMock.*;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.io.IOException;
+
+import static org.easymock.EasyMock.createNiceMock;
+import static org.easymock.EasyMock.replay;
 
 /**
  * Contains the common code of ClassVisitors tests.
@@ -27,11 +28,7 @@ public abstract class AbstractClassVisitorT {
     protected String mPathToClass2 = "./target/test-classes/KlasaTestowaChld.class";
     protected String mPathToClass3 = "./target/test-classes/KlasaTestowa2.class";
 
-    public AbstractClassVisitorT() {
-
-    }
-
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         mJavaClass1 = new ClassParser(mPathToClass1).parse();
         mCountingProps = createNiceMock(ICountingProperities.class);

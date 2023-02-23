@@ -1,27 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-//import gr.spinellis.ckjm.ClassVisitor.Lcom3Counter;
+import org.junit.jupiter.api.Test;
+
 import java.util.TreeSet;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author marian
  */
 public class Lcom3CounterTest {
-
-    @Before
-    public void setUp() {
-    }
 
     /**
      * Test of isJdkIncluded method, of class CountingProperities.

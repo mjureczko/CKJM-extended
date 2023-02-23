@@ -1,16 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- *
  * @author marian
  */
 public class MoaClassVisitorTest extends AbstractClassVisitorT {
@@ -28,9 +24,9 @@ public class MoaClassVisitorTest extends AbstractClassVisitorT {
         moaCounter.visitJavaClass(mJavaClass3);
         moaCounter.end();
 
-        assertEquals( "MOA in KlasaTestowa", 0, mClassMetrics1.getMoa() );
-        assertEquals( "MOA in KlasaTestowaChld", 0, mClassMetrics2.getMoa() );
-        assertEquals( "MOA in KlasaTestowa2", 1, mClassMetrics3.getMoa() );
+        assertEquals(0, mClassMetrics1.getMoa(), () -> "MOA in KlasaTestowa");
+        assertEquals(0, mClassMetrics2.getMoa(), () -> "MOA in KlasaTestowaChld");
+        assertEquals(1, mClassMetrics3.getMoa(), () -> "MOA in KlasaTestowa2");
     }
 
 }

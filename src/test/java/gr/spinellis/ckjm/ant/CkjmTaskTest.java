@@ -9,21 +9,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.tools.ant.BuildException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author mjureczk
  */
 public class CkjmTaskTest {
 
+    //TODO: delete test file if exists
     private final String outFile = "test_out.txt";
-
-    public CkjmTaskTest() {
-        //TODO: delete test file if exists
-    }
-
 
     /**
      * Test of execute method, of class CkjmTask.

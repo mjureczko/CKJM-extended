@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- *
  * @author mjureczk
  */
 public class CamClassVisitorTest extends AbstractClassVisitorT {
@@ -31,9 +26,9 @@ public class CamClassVisitorTest extends AbstractClassVisitorT {
         camCounter.visitJavaClass(mJavaClass2);
         camCounter.visitJavaClass(mJavaClass3);
 
-        assertEquals( "CAM in KlasaTestowa", 0.55556, mClassMetrics1.getCam(), 0.0001 );
-        assertEquals( "CAM in ChildOfChld", 0.5, mClassMetrics2.getCam(), 0.0001 );
-        assertEquals( "CAM in KlasaTestowa2", 0.625, mClassMetrics3.getCam(), 0.0001 );
+        assertEquals(0.55556, mClassMetrics1.getCam(), 0.0001, "CAM in KlasaTestowa");
+        assertEquals(0.5, mClassMetrics2.getCam(), 0.0001, "CAM in ChildOfChld");
+        assertEquals(0.625, mClassMetrics3.getCam(), 0.0001, "CAM in KlasaTestowa2");
     }
 
 }

@@ -1,27 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.Before;
-import org.junit.Test;
-import gr.spinellis.ckjm.*;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
- *
  * @author marian
  */
 public class TreeSetWithIdTest {
 
     public TreeSetWithId<Integer> tswi;
 
-    public TreeSetWithIdTest() {
-    }
-
-    @Before
+    @BeforeEach
     public void setUp() {
         tswi = new TreeSetWithId<Integer>();
     }
@@ -32,9 +24,9 @@ public class TreeSetWithIdTest {
     @Test
     public void testId() {
         String id = "ID";
-        assertNull( "Id hasn'b been set yet.", tswi.getId() );
-        tswi.setId( id );
-        assertEquals( "Id has been set.", id, tswi.getId() );
+        assertNull(tswi.getId(), "Id hasn'b been set yet.");
+        tswi.setId(id);
+        assertEquals(id, tswi.getId(), "Id has been set.");
     }
 
 

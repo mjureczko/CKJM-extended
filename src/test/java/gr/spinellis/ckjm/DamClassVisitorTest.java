@@ -1,22 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
  * @author marian
  */
 public class DamClassVisitorTest extends AbstractClassVisitorT {
-
-    public DamClassVisitorTest() {
-    }
 
 
     /**
@@ -28,11 +21,11 @@ public class DamClassVisitorTest extends AbstractClassVisitorT {
 
         damCounter = new DamClassVisitor(mJavaClass1, mContainer);
         damCounter.visitJavaClass(mJavaClass1);
-        assertEquals( "DAM in KlasaTestowa", 0.0, mClassMetrics1.getDam(), 0.0001 );
+        assertEquals(0.0, mClassMetrics1.getDam(), 0.0001, "DAM in KlasaTestowa");
 
         damCounter = new DamClassVisitor(mJavaClass2, mContainer);
         damCounter.visitJavaClass(mJavaClass2);
-        assertEquals( "DAM in KlasaTestowaChld", 1.0, mClassMetrics2.getDam(), 0.0001 );
+        assertEquals(1.0, mClassMetrics2.getDam(), 0.0001, "DAM in KlasaTestowaChld");
     }
 
 }

@@ -1,15 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- *
  * @author mjureczk
  */
 public class AnonymousInternAbstractClassesTest extends AbstractClassVisitorT {
@@ -27,50 +22,50 @@ public class AnonymousInternAbstractClassesTest extends AbstractClassVisitorT {
     }
 
     @Test
-    public void anonymouseInternTest(){
+    public void anonymouseInternTest() {
         mCkjm.countMetrics(mPath2TestClass, mHandle);
         ClassMetrics cm = mHandle.getMetrics(mTestClass);
-        assertEquals("AMC",5.034,cm.getAmc(),0.001);
-        assertEquals("CA",0,cm.getCa(),0);
-        assertEquals("CAM",0.2807,cm.getCam(),0.001);
-        assertEquals("CBM",0,cm.getCbm());
-        assertEquals("CBO",1,cm.getCbo());
-        assertEquals("CE",1,cm.getCe());
-        assertEquals("DAM",0,cm.getDam(),0.001);
-        assertEquals("DIT",1,cm.getDit());
-        assertEquals("IC",0,cm.getIc());
-        assertEquals("LCOM",406,cm.getLcom());
-        assertEquals("LCOM3",1.0,cm.getLcom3(),0.001);
-        assertEquals("LOC",176,cm.getLoc());
-        assertEquals("MFA",0,cm.getMfa(),0.001);
-        assertEquals("MOA",0,cm.getMoa());
-        assertEquals("NOC",0,cm.getNoc());
-        assertEquals("NPM",28,cm.getNpm());
-        assertEquals("RFC",29,cm.getRfc());
-        assertEquals("WMC",29,cm.getWmc()); //Surprised why not 23? There are 29 methods in the binary code.
+        assertEquals(5.034, cm.getAmc(), 0.001, "AMC");
+        assertEquals(0, cm.getCa(), 0, "CA");
+        assertEquals(0.2807, cm.getCam(), 0.001, "CAM");
+        assertEquals(0, cm.getCbm(), "CBM");
+        assertEquals(1, cm.getCbo(), "CBO");
+        assertEquals(1, cm.getCe(), "CE");
+        assertEquals(0, cm.getDam(), 0.001, "DAM");
+        assertEquals(1, cm.getDit(), "DIT");
+        assertEquals(0, cm.getIc(), "IC");
+        assertEquals(406, cm.getLcom(), "LCOM");
+        assertEquals(1.0, cm.getLcom3(), 0.001, "LCOM3");
+        assertEquals(176, cm.getLoc(), "LOC");
+        assertEquals(0, cm.getMfa(), 0.001, "MFA");
+        assertEquals(0, cm.getMoa(), "MOA");
+        assertEquals(0, cm.getNoc(), "NOC");
+        assertEquals(28, cm.getNpm(), "NPM");
+        assertEquals(29, cm.getRfc(), "RFC");
+        assertEquals(29, cm.getWmc(), "WMC - surprised why not 23? There are 29 methods in the binary code.");
     }
 
     @Test
-    public void abstractTest(){
+    public void abstractTest() {
         mCkjm.countMetrics(mPath2TestClass2, mHandle);
         ClassMetrics cm = mHandle.getMetrics(mTestClass2);
-        assertEquals("AMC",2.33333,cm.getAmc(),0.001);
-        assertEquals("CA",0,cm.getCa(),0);
-        assertEquals("CAM",1,cm.getCam(),0.001);
-        assertEquals("CBM",0,cm.getCbm());
-        assertEquals("CBO",0,cm.getCbo());
-        assertEquals("CE",0,cm.getCe());
-        assertEquals("DAM",0,cm.getDam(),0.001);
-        assertEquals("DIT",1,cm.getDit());
-        assertEquals("IC",0,cm.getIc());
-        assertEquals("LCOM",3,cm.getLcom());
-        assertEquals("LCOM3",2.0,cm.getLcom3(),0.001);
-        assertEquals("LOC",10,cm.getLoc());
-        assertEquals("MFA",0,cm.getMfa(),0.001);
-        assertEquals("MOA",0,cm.getMoa());
-        assertEquals("NOC",0,cm.getNoc());
-        assertEquals("NPM",1,cm.getNpm());
-        assertEquals("RFC",5,cm.getRfc());
-        assertEquals("WMC",3,cm.getWmc());
+        assertEquals(2.33333, cm.getAmc(), 0.001, "AMC");
+        assertEquals(0, cm.getCa(), 0, "CA");
+        assertEquals(1, cm.getCam(), 0.001, "CAM");
+        assertEquals(0, cm.getCbm(), "CBM");
+        assertEquals(0, cm.getCbo(), "CBO");
+        assertEquals(0, cm.getCe(), "CE");
+        assertEquals(0, cm.getDam(), 0.001, "DAM");
+        assertEquals(1, cm.getDit(), "DIT");
+        assertEquals(0, cm.getIc(), "IC");
+        assertEquals(3, cm.getLcom(), "LCOM");
+        assertEquals(2.0, cm.getLcom3(), 0.001, "LCOM3");
+        assertEquals(10, cm.getLoc(), "LOC");
+        assertEquals(0, cm.getMfa(), 0.001, "MFA");
+        assertEquals(0, cm.getMoa(), "MOA");
+        assertEquals(0, cm.getNoc(), "NOC");
+        assertEquals(1, cm.getNpm(), "NPM");
+        assertEquals(5, cm.getRfc(), "RFC");
+        assertEquals(3, cm.getWmc(), "WMC");
     }
 }

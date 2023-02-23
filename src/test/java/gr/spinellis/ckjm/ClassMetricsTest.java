@@ -1,47 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import java.util.HashSet;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
  * @author marian
  */
 public class ClassMetricsTest {
 
     ClassMetrics cm;
-    private static final String mFirst="first";
-    private static final String mSecond="second";
-    private static final String mThird="third";
+    private static final String mFirst = "first";
+    private static final String mSecond = "second";
+    private static final String mThird = "third";
 
-    public ClassMetricsTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
+    @BeforeEach
     public void setUp() {
         cm = new ClassMetrics();
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -53,145 +31,145 @@ public class ClassMetricsTest {
         int firstMethodCc = 17;
         int secondMethodCc = 0;
 
-        assertEquals( "There are no methods.", 0, cm.getMethodNames().size() );
-        assertEquals( "There are no methods.", 0, cm.getCC(mFirst) );
-        
-        cm.addMethod( mFirst, firstMethodCc );
-        cm.addMethod( mSecond, secondMethodCc );
-        assertTrue( "First method.", cm.getMethodNames().contains(mFirst) );
-        assertEquals( "First method.", firstMethodCc, cm.getCC(mFirst) );
-        assertTrue( "Second method.", cm.getMethodNames().contains(mSecond) );
-        assertEquals( "Second method.", secondMethodCc, cm.getCC(mSecond) );
+        assertEquals(cm.getMethodNames().size(), 0, "There are no methods.");
+        assertEquals(cm.getCC(mFirst), 0, "There are no methods.");
+
+        cm.addMethod(mFirst, firstMethodCc);
+        cm.addMethod(mSecond, secondMethodCc);
+        assertTrue(cm.getMethodNames().contains(mFirst), "First method.");
+        assertEquals(firstMethodCc, cm.getCC(mFirst), "First method.");
+        assertTrue(cm.getMethodNames().contains(mSecond), "Second method.");
+        assertEquals(secondMethodCc, cm.getCC(mSecond), "Second method.");
     }
 
     @Test
-    public void testWMC(){
-        assertEquals( "WMC 0", 0, cm.getWmc() );
+    public void testWMC() {
+        assertEquals(0, cm.getWmc(), "WMC 0");
         cm.incWmc();
-        assertEquals( "WMC 1", 1, cm.getWmc() );
+        assertEquals(1, cm.getWmc(), "WMC 1");
         cm.incWmc();
-        assertEquals( "WMC 2", 2, cm.getWmc() );
+        assertEquals(2, cm.getWmc(), "WMC 2");
     }
 
     @Test
-    public void testDIT(){
-        assertEquals( "DIT 0", 0, cm.getDit() );
+    public void testDIT() {
+        assertEquals(0, cm.getDit(), "DIT 0");
         cm.setDit(7);
-        assertEquals( "DIT 7", 7, cm.getDit() );
+        assertEquals(7, cm.getDit(), "DIT 7");
     }
 
     @Test
-    public void testNOC(){
-        assertEquals( "NOC 0", 0, cm.getNoc() );
+    public void testNOC() {
+        assertEquals(0, cm.getNoc(), "NOC 0");
         cm.incNoc();
-        assertEquals( "NOC 1", 1, cm.getNoc() );
+        assertEquals(1, cm.getNoc(), "NOC 1");
         cm.incNoc();
-        assertEquals( "NOC 2", 2, cm.getNoc() );
+        assertEquals(2, cm.getNoc(), "NOC 2");
     }
 
     @Test
-    public void testCe(){
+    public void testCe() {
         HashSet<String> classNames = new HashSet<String>();
         classNames.add(mFirst);
         classNames.add(mSecond);
 
-        assertEquals( "CE 0", 0, cm.getCe() );
-        cm.setCe( classNames );
-        assertEquals( "CE 2", 2, cm.getCe() );
+        assertEquals(0, cm.getCe(), "CE 0");
+        cm.setCe(classNames);
+        assertEquals(2, cm.getCe(), "CE 2");
     }
 
     @Test
-    public void testRFC(){
-        assertEquals( "RFC 0", 0, cm.getRfc() );
+    public void testRFC() {
+        assertEquals(0, cm.getRfc(), "RFC 0");
         cm.setRfc(7);
-        assertEquals( "RFC 7", 7, cm.getRfc() );
+        assertEquals(7, cm.getRfc(), "RFC 7");
     }
 
     @Test
-    public void testLCOM(){
-        assertEquals( "LCOM 0", 0, cm.getLcom() );
-        cm.setLcom( 7 );
-        assertEquals( "LCOM 7", 7, cm.getLcom() );
+    public void testLCOM() {
+        assertEquals(0, cm.getLcom(), "LCOM 0");
+        cm.setLcom(7);
+        assertEquals(7, cm.getLcom(), "LCOM 7");
     }
 
     @Test
-    public void testCA(){
-        
+    public void testCA() {
 
-        assertEquals( "CA 0", 0, cm.getCa() );
+
+        assertEquals(0, cm.getCa(), "CA 0");
         cm.addAfferentCoupling(mFirst);
-        assertEquals( "CA 1", 1, cm.getCa() );
+        assertEquals(1, cm.getCa(), "CA 1");
         cm.addAfferentCoupling(mFirst);
-        assertEquals( "CA 1", 1, cm.getCa() );
+        assertEquals(1, cm.getCa(), "CA 1");
         cm.addAfferentCoupling(mSecond);
-        assertEquals( "CA 2", 2, cm.getCa() );
+        assertEquals(2, cm.getCa(), "CA 2");
     }
 
     @Test
-    public void testNPM(){
-        assertEquals( "NPM 0", 0, cm.getNpm() );
+    public void testNPM() {
+        assertEquals(0, cm.getNpm(), "NPM 0");
         cm.incNpm();
-        assertEquals( "NPM 1", 1, cm.getNpm() );
+        assertEquals(1, cm.getNpm(), "NPM 1");
         cm.incNpm();
-        assertEquals( "NPM 2", 2, cm.getNpm() );
+        assertEquals(2, cm.getNpm(), "NPM 2");
     }
 
     @Test
-    public void testLCOM3(){
-        assertEquals( "LCOM3 0", 0, cm.getLcom() );
-        cm.setLcom3( 1.07 );
-        assertEquals( "LCOM3 1.07", 1.07, cm.getLcom3(), 0.001 );
-        try{
+    public void testLCOM3() {
+        assertEquals(0, cm.getLcom(), "LCOM3 0");
+        cm.setLcom3(1.07);
+        assertEquals(1.07, cm.getLcom3(), 0.001, "LCOM3 1.07");
+        try {
             cm.setLcom3(2.01);
             //fail("LCOM3 cann't be greater as 2!");
-            assertEquals( "LCOM3 2.01", 2, cm.getLcom3(), 0.001 );
-        }catch( RuntimeException re ){
+            assertEquals(2, cm.getLcom3(), 0.001, "LCOM3 2.01");
+        } catch (RuntimeException re) {
             assertTrue(true);
         }
-        try{
+        try {
             cm.setLcom3(-0.01);
             //fail("LCOM3 cann't be lower as 0!");
-            assertEquals( "LCOM3 -0.01", 0, cm.getLcom3(), 0.001 );
-        }catch( RuntimeException re ){
+            assertEquals(0, cm.getLcom3(), 0.001, "LCOM3 -0.01");
+        } catch (RuntimeException re) {
             assertTrue(true);
         }
     }
 
     @Test
     public void testIsJdkClass() {
-        assertTrue( "java.", ClassMetrics.isJdkClass("java.Class") );
-        assertTrue( "javax.", ClassMetrics.isJdkClass("javax.Class") );
-        assertTrue( "org.omg.", ClassMetrics.isJdkClass("org.omg.Class") );
-        assertTrue( "org.w3c.dom.", ClassMetrics.isJdkClass("org.w3c.dom.Class") );
-        assertTrue( "org.xml.sax.", ClassMetrics.isJdkClass("org.xml.sax.") );
-        assertFalse( "gr.spinellis.ckjm.ClassMetrics", ClassMetrics.isJdkClass("gr.spinellis.ckjm.ClassMetrics") );
+        assertTrue(ClassMetrics.isJdkClass("java.Class"), "java.");
+        assertTrue(ClassMetrics.isJdkClass("javax.Class"), "javax.");
+        assertTrue(ClassMetrics.isJdkClass("org.omg.Class"), "org.omg.");
+        assertTrue(ClassMetrics.isJdkClass("org.w3c.dom.Class"), "org.w3c.dom.");
+        assertTrue(ClassMetrics.isJdkClass("org.xml.sax."), "org.xml.sax.");
+        assertFalse(ClassMetrics.isJdkClass("gr.spinellis.ckjm.ClassMetrics"), "gr.spinellis.ckjm.ClassMetrics");
     }
 
     @Test
     public void testCBO() {
-        assertEquals( "CBO 0", 0, cm.getCbo() );
+        assertEquals(0, cm.getCbo(), "CBO 0");
         cm.addAfferentCoupling(mFirst);
         cm.addAfferentCoupling(mSecond);
         HashSet<String> efferentCoupling = new HashSet<String>();
         efferentCoupling.add(mSecond);
         efferentCoupling.add(mThird);
         cm.setCe(efferentCoupling);
-        assertEquals( "CBO 3", 3, cm.getCbo() );
+        assertEquals(3, cm.getCbo(), "CBO 3");
     }
 
     @Test
     public void testLOC() {
-        int a=17;
-        assertEquals( "LOC 0", 0, cm.getLoc() );
-        cm.addLoc( a );
-        assertEquals( "LOC 17", a, cm.getLoc() );
+        int a = 17;
+        assertEquals(0, cm.getLoc(), "LOC 0");
+        cm.addLoc(a);
+        assertEquals(a, cm.getLoc(), "LOC 17");
     }
 
     @Test
     public void testDAM() {
-        double a=0.17;
-        assertEquals( "DAM 0", 0.0, cm.getDam(), 0.0001 );
+        double a = 0.17;
+        assertEquals(0.0, cm.getDam(), 0.0001, "DAM 0");
         cm.setDam(a);
-        assertEquals( "DAM 0.17", a, cm.getDam(), 0.0001 );
+        assertEquals(a, cm.getDam(), 0.0001, "DAM 0.17");
     }
 }

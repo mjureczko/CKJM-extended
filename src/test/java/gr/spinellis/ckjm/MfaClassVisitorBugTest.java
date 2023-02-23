@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -28,7 +25,7 @@ public class MfaClassVisitorBugTest  extends AbstractClassVisitorT {
 
         mfaCounter.visitJavaClass(mJavaClass1);
         
-        assertEquals( "MFA in KlasaTestowa", 0, mClassMetrics1.getMfa(), 0.0001 );
+        assertEquals( 0, mClassMetrics1.getMfa(), 0.0001, "MFA in KlasaTestowa" );
     }
 
 }

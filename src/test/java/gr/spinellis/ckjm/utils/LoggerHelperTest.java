@@ -5,6 +5,9 @@
 
 package gr.spinellis.ckjm.utils;
 
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -15,11 +18,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  *
@@ -27,22 +28,11 @@ import static org.junit.Assert.*;
  */
 public class LoggerHelperTest {
 
-    public LoggerHelperTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
     /**
      * Test of printError method, of class LoggerHelper.
      * Test does not work on selected environments thus is ignored.
      */
-    @Ignore
+    @Disabled
     @Test
     public void testPrintError() throws IOException {
         String out = "temp.txt";

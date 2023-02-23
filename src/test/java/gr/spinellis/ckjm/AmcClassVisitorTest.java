@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *
@@ -27,6 +23,6 @@ public class AmcClassVisitorTest extends AbstractClassVisitorT {
         mClassMetrics1.incWmc();
         mClassMetrics1.incWmc();
         amcCounter.visitJavaClass(mJavaClass1);
-        assertEquals("AMC in KlasaTestowa", (100.0-4.0)/3.0, mClassMetrics1.getAmc(), 0.0001);
+        assertEquals((100.0-4.0)/3.0, mClassMetrics1.getAmc(), 0.0001, "AMC in KlasaTestowa");
     }
 }

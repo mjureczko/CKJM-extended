@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import static org.easymock.EasyMock.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -25,23 +18,11 @@ public class ClassMetricsContainerTest {
     public ClassMetricsContainerTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
-
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
-
-    @Before
+    @BeforeEach
     public void setUp() {
         ICountingProperities cp = createNiceMock( ICountingProperities.class );
         replay(cp);
         cmc = new ClassMetricsContainer(cp);
-    }
-
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -54,13 +35,13 @@ public class ClassMetricsContainerTest {
         String second = "second";
 
         ClassMetrics cm = cmc.getMetrics( first );
-        assertNotNull( "Get \"first\" Metrics first time.", cm );
+        assertNotNull(cm, "Get \"first\" Metrics first time.");
         ClassMetrics cm2 = cmc.getMetrics( second );
-        assertNotNull( "Get \"second\" Metrics first time.", cm2 );
-        assertNotSame( "Get \"second\" Metrics first time.", cm2, cm);
+        assertNotNull(cm2, "Get \"second\" Metrics first time.");
+        assertNotSame(cm2, cm, "Get \"second\" Metrics first time.");
 
         cm2 = cmc.getMetrics( first );
-        assertSame( "Get \"first\" Metrics second time.", cm2, cm);
+        assertSame(cm2, cm, "Get \"first\" Metrics second time.");
     }
 
     /**

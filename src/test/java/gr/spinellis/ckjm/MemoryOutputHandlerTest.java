@@ -1,29 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
- *
  * @author marian
  */
 public class MemoryOutputHandlerTest {
-
-    public MemoryOutputHandlerTest() {
-    }
-
-
-    @Before
-    public void setUp() {
-    }
 
     /**
      * Test of handleClass method, of class MemoryOutputHandler.
@@ -34,11 +19,11 @@ public class MemoryOutputHandlerTest {
         MemoryOutputHandler out = new MemoryOutputHandler();
         String className = "SimpleClass";
 
-        assertNull("Any classes has been measured", out.getMetrics(className));
+        assertNull(out.getMetrics(className), "Any classes has been measured");
         out.handleClass(className, cm);
-        assertSame("Get ClassMetrics", cm, out.getMetrics(className ) );
-        assertNull("There was no such class", out.getMetrics("BlahBlah"));
-        assertNull("Null class", out.getMetrics(null));
+        assertSame(cm, out.getMetrics(className), "Get ClassMetrics");
+        assertNull(out.getMetrics("BlahBlah"), "There was no such class");
+        assertNull(out.getMetrics(null), "Null class");
     }
 
 }

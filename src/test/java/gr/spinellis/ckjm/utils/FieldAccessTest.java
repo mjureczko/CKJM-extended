@@ -1,22 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gr.spinellis.ckjm.utils;
 
 import java.io.IOException;
+
 import org.apache.bcel.classfile.ClassParser;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- *
  * @author mjureczk
  */
 public class FieldAccessTest {
@@ -37,8 +30,7 @@ public class FieldAccessTest {
     @Test
     public void testToString() {
         FieldAccess fa = new FieldAccess("field1", mMethod1, mJavaClass);
-        assertEquals("ToString", mJavaClass.getClassName()+"."+mMethod1.getName()+" uses field1",
-                fa.toString() );
+        assertEquals(mJavaClass.getClassName() + "." + mMethod1.getName() + " uses field1", fa.toString(), "ToString");
     }
 
     /**
@@ -50,11 +42,11 @@ public class FieldAccessTest {
         FieldAccess fa2 = new FieldAccess("field2", mMethod2, mJavaClass);
         FieldAccess fa3 = new FieldAccess("field1", mMethod1, mJavaClass);
 
-        assertEquals( "CompareTo - not equal", 50, fa1.compareTo(fa2) );
-        assertEquals( "CompareTo - not equal", -50, fa2.compareTo(fa1) );
+        assertEquals(50, fa1.compareTo(fa2), "CompareTo - not equal");
+        assertEquals(-50, fa2.compareTo(fa1), "CompareTo - not equal");
 
-        assertEquals( "CompareTo - equal", 0, fa1.compareTo(fa3) );
-        assertEquals( "CompareTo - equal", 0, fa3.compareTo(fa1) );
+        assertEquals(0, fa1.compareTo(fa3), "CompareTo - equal");
+        assertEquals(0, fa3.compareTo(fa1), "CompareTo - equal");
 
     }
 
