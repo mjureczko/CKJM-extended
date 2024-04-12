@@ -2,7 +2,7 @@ pull_request_rules:
   - name: Automatically merge dependency updates
     conditions:
       - author=dependabot[bot]
-      - status-success=Test / build (pull_request)
+      - status-success=Test
       - base=master
     actions:
       merge:
