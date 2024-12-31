@@ -22,4 +22,28 @@ jobs:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           ossrh_login: ${{ secrets.ossrh_login }}
           ossrh_pass: ${{ secrets.ossrh_pass }}
-        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
+        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml -X
+      - name: Rename and prepare release asset
+        run: |
+          version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$version" >> $GITHUB_ENV
+          mv target/runable-ckjm_ext-${version}.jar target/ckjm_ext.jar
+        id: prepare_release
+          - name: Create GitHub Release
+            uses: actions/create-release@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              tag_name: v${{ env.version }}
+              release_name: Release ${{ env.version }}
+              draft: true
+              prerelease: false
+          - name: Upload Release Asset
+            uses: actions/upload-release-asset@v1
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              upload_url: ${{ steps.create-release.outputs.upload_url }}
+              asset_path: target/ckjm_ext.jar
+              asset_name: ckjm_ext.jar
+              asset_content_type: application/java-archive
