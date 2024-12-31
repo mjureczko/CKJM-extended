@@ -17,18 +17,21 @@ jobs:
           gpg_private_key: ${{ secrets.gpg_private_key }}
         run: |
           printf "%s" "$gpg_private_key" | gpg --import --batch --yes
+
       - name: Release with nexus-staging-maven-plugin
         env:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           ossrh_login: ${{ secrets.ossrh_login }}
           ossrh_pass: ${{ secrets.ossrh_pass }}
         run: mvn -B -s .mvn/settings.xml install --file pom.xml
+
       - name: Rename and prepare release asset
         run: |
           version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "version=$version" >> $GITHUB_ENV
           mv target/runable-ckjm_ext-${version}.jar target/ckjm_ext.jar
         id: prepare_release
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
@@ -39,16 +42,19 @@ jobs:
           release_name: Release ${{ env.version }}
           draft: false
           prerelease: false
+
       - name: Check Release Asset
         run: ls -lh target/ckjm_ext.jar
+
       - name: Debug Create Release Outputs
         run: echo "Upload URL ${{ steps.create_release.outputs.upload_url }}"
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: target/ckjm_ext.jar
           asset_name: ckjm_ext.jar
           asset_content_type: application/java-archive
