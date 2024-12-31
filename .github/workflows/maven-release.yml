@@ -37,8 +37,12 @@ jobs:
         with:
           tag_name: v${{ env.version }}
           release_name: Release ${{ env.version }}
-          draft: true
+          draft: false
           prerelease: false
+      - name: Check Release Asset
+        run: ls -lh target/ckjm_ext.jar
+      - name: Debug Create Release Outputs
+        run: echo "Upload URL ${{ steps.create_release.outputs.upload_url }}"
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
