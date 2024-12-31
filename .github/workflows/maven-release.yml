@@ -22,4 +22,4 @@ jobs:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           ossrh_login: ${{ secrets.ossrh_login }}
           ossrh_pass: ${{ secrets.ossrh_pass }}
-        run: gpg --list-keys
+        run: echo "OSSRH Login $ossrh_login"
