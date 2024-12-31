@@ -22,7 +22,7 @@ jobs:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           ossrh_login: ${{ secrets.ossrh_login }}
           ossrh_pass: ${{ secrets.ossrh_pass }}
-        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml -X
+        run: mvn -B -s .mvn/settings.xml install --file pom.xml
       - name: Rename and prepare release asset
         run: |
           version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -30,6 +30,7 @@ jobs:
           mv target/runable-ckjm_ext-${version}.jar target/ckjm_ext.jar
         id: prepare_release
       - name: Create GitHub Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
