@@ -40,7 +40,7 @@ jobs:
         with:
           tag_name: v${{ env.version }}
           release_name: Release ${{ env.version }}
-          draft: false
+          draft: true
           prerelease: false
 
       - name: Check Release Asset
