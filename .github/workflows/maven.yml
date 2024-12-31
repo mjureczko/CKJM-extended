@@ -17,5 +17,5 @@ jobs:
         distribution: 'temurin'
         java-version: 17
     - name: Verify with Maven
-      run: gpg --list-keys
+      run: mvn -B verify --file pom.xml
 
