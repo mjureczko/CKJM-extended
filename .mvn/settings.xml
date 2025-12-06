@@ -5,9 +5,9 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <servers>
         <server>
-            <id>ossrh</id>
-            <username>${env.ossrh_login}</username>
-            <password>${env.ossrh_pass}</password>
+            <id>central</id>
+            <username>${env.central_login}</username>
+            <password>${env.central_pass}</password>
         </server>
     </servers>
 
