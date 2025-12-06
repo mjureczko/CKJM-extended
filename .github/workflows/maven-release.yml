@@ -22,4 +22,7 @@ jobs:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           ossrh_login: ${{ secrets.ossrh_login }}
           ossrh_pass: ${{ secrets.ossrh_pass }}
-        run: mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
+        run: |
+          echo "CENTRAL_LOGIN length: ${#CENTRAL_LOGIN}"
+          echo "CENTRAL_PASS length: ${#CENTRAL_PASS}"
+#          mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
