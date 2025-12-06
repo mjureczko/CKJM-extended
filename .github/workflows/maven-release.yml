@@ -20,9 +20,9 @@ jobs:
       - name: Release with nexus-staging-maven-plugin
         env:
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
-          ossrh_login: ${{ secrets.ossrh_login }}
-          ossrh_pass: ${{ secrets.ossrh_pass }}
+          ossrh_login: ${{ secrets.central_login }}
+          ossrh_pass: ${{ secrets.central_pass }}
         run: |
-          echo "CENTRAL_LOGIN length: ${#CENTRAL_LOGIN}"
-          echo "CENTRAL_PASS length: ${#CENTRAL_PASS}"
-#          mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
+          echo "CENTRAL_LOGIN length: ${#central_login}"
+          echo "CENTRAL_PASS length: ${#central_pass}"
+          mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
