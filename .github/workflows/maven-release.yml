@@ -23,6 +23,4 @@ jobs:
           central_login: ${{ secrets.central_login }}
           central_pass: ${{ secrets.central_pass }}
         run: |
-          echo "CENTRAL_LOGIN length: ${#central_login}"
-          echo "CENTRAL_PASS length: ${#central_pass}"
           mvn -B -s .mvn/settings.xml -P release deploy --file pom.xml
