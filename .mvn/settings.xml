@@ -6,8 +6,8 @@
     <servers>
         <server>
             <id>central</id>
-            <username>${env.central_login}</username>
-            <password>${env.central_pass}</password>
+            <username>${env.CENTRAL_LOGIN}</username>
+            <password>${env.CENTRAL_PASS}</password>
         </server>
     </servers>
 
