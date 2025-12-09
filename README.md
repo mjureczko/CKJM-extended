@@ -2,7 +2,19 @@
 
 Unless otherwise expressly stated, all original material on this page created by Diomidis Spinellis or Marian Jureczko is licensed under a (Creative Commons Attribution-Noncommercial-No Derivative Works 2.5 License)[http://creativecommons.org/licenses/by-nc-nd/2.5/].
 
-[[TOC]]
+## Table of Contents
+- [Introduction](#introduction)
+- [Operation](#operation)
+- [Using Pipelines to Select Classes](#using-pipelines-to-select-classes)
+- [Using Pipelines to Format the Output](#using-pipelines-to-format-the-output)
+- [Metric Descriptions](#metric-descriptions)
+- [Measurement Details](#measurement-details)
+- [Using Ckjm With Ant](#using-ckjm-with-ant)
+- [Web Links and Acknowledgements](#web-links-and-acknowledgements)
+- [Bibliography](#bibliography)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Contributors](#contributors)
+- [Download](#download)
 
 ## Introduction
 
