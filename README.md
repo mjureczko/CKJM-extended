@@ -400,12 +400,12 @@ Maven:
         <dependency>
             <groupId>gr.spinellis.ckjm</groupId>
             <artifactId>ckjm_ext</artifactId>
-            <version>2.9</version>
+            <version>2.10</version>
             <type>jar</type>
         </dependency>
 ```
 
 Gradle:
 ```
-implementation 'gr.spinellis.ckjm:ckjm_ext:2.9'
+implementation 'gr.spinellis.ckjm:ckjm_ext:2.10'
 ```
