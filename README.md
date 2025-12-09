@@ -375,19 +375,19 @@ address = {Wroclaw, Poland}
 
 ## Contributors
 
-Panagiotis Louridas
+- Panagiotis Louridas
 
 Fix for a script in the documentation
 
-Antti Pöyhönen
+- Antti Pöyhönen
 
 RFC fix, count exceptions
 
-Julien Rentrop
+- Julien Rentrop
 
 XML output and Ant task
 
-jazzmuesli
+- jazzmuesli
 
 BCEL upgrade to 6.5.0 
 
