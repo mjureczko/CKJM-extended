@@ -393,7 +393,7 @@ BCEL upgrade to 6.5.0
 
 ## Download
 
-[ckjm package - .jar](https://github.com/mjureczko/CKJM-extended/releases/download/v2.9/ckjm_ext.jar)
+[ckjm package - .jar](https://github.com/mjureczko/CKJM-extended/releases/download/v2.10/ckjm_ext.jar)
 
 Maven:
 ```xml
