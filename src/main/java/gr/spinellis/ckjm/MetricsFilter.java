@@ -100,15 +100,16 @@ public class MetricsFilter implements ICountingProperities {
         }
 
         CkjmOutputHandler handler;
-        if (cmdParser.isArgSet("x")) {
+        if (cmdParser.isArgSet(CmdLineParser.XML_MODE_ARG)) {
             handler = new PrintXmlResults(new PrintStream(System.out));
         } else {
             handler = new PrintPlainResults(System.out);
         }
 
         String[] tmp = new String[1];
+        handler.printHeader();
         mf.runMetricsInternal(cmdParser.getClassNames().toArray(tmp), handler);
-
+        handler.printFooter();
     }
 
     /**

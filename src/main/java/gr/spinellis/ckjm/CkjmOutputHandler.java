@@ -31,4 +31,8 @@ public interface CkjmOutputHandler {
      * @param c Value object that contains the corresponding metrics
      */
     void handleClass(String name, ClassMetrics c);
+
+    default void printHeader() {}
+
+    default void printFooter() {}
 }

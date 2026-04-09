@@ -29,7 +29,7 @@ public class CmdLineParserTest {
         parser.parse(new String[]{"-s", "-p", "class"});
         assertTrue(parser.isArgSet("s"));
         assertTrue(parser.isArgSet("p"));
-        assertFalse(parser.isArgSet("x"));
+        assertFalse(parser.isArgSet(CmdLineParser.XML_MODE_ARG));
     }
 
     @Test
@@ -37,14 +37,14 @@ public class CmdLineParserTest {
         parser.parse(new String[]{"-xs", "-p", "class"});
         assertTrue(parser.isArgSet("s"));
         assertTrue(parser.isArgSet("p"));
-        assertTrue(parser.isArgSet("x"));
+        assertTrue(parser.isArgSet(CmdLineParser.XML_MODE_ARG));
         assertFalse(parser.isArgSet("g"));
     }
 
     @Test
     public void testParseClasses() {
         parser.parse(new String[]{"-x", "blah.jar;blah2.jar", "class"});
-        assertTrue(parser.isArgSet("x"));
+        assertTrue(parser.isArgSet(CmdLineParser.XML_MODE_ARG));
         List<String> classes = parser.getClassNames();
         assertEquals(3, classes.size());
         assertTrue(classes.contains("blah.jar"));

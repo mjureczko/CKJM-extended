@@ -1,6 +1,7 @@
 package gr.spinellis.ckjm;
 
 import org.junit.jupiter.api.Test;
+import org.xml.sax.InputSource;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
+
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -91,6 +94,7 @@ public class MetricsFilterTest {
 
     @Test
     public void testMainXML() throws IOException {
+        //given
         String[] expected = {"\t<class>",
                 "\t\t<name>KlasaTestowa</name>",
                 "\t\t<wmc>3</wmc>",
@@ -121,9 +125,13 @@ public class MetricsFilterTest {
 
         System.setOut(new PrintStream(new FileOutputStream(out)));
         String argv[] = {"./target/test-classes/KlasaTestowa.class", "-x"};
+
+        //when
         MetricsFilter.main(argv);
 
+        //then
         String[] outContent = readFile(out);
+        outContent = Arrays.copyOfRange(outContent, 2, outContent.length - 1);
 
         Arrays.sort(expected);
         Arrays.sort(outContent);
@@ -131,6 +139,65 @@ public class MetricsFilterTest {
         for (int i = 0; i < outContent.length; i++) {
             assertEquals(expected[i], outContent[i], "testing: " + outContent[i]);
 
+        }
+    }
+
+    @Test
+    void should_printXmlHeaderAndFooter_whenXmlModeIsEnabled() {
+        // given
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+
+        // when
+        try {
+            System.setOut(new PrintStream(capturedOut));
+            MetricsFilter.main(new String[]{"./target/test-classes/KlasaTestowa.class", "-x"});
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        // then
+        String output = capturedOut.toString();
+        List<String> lines = new ArrayList<>();
+        for (String line : output.split(System.lineSeparator())) {
+            if (!line.matches("\\s*")) {
+                lines.add(line);
+            }
+        }
+        assertEquals("<?xml version=\"1.0\"?>", lines.get(0).trim(), "XML declaration (header) is missing");
+        assertEquals("<ckjm>", lines.get(1).trim(), "Root opening tag <ckjm> (header) is missing");
+        assertEquals("</ckjm>", lines.get(lines.size() - 1).trim(), "Root closing tag </ckjm> (footer) is missing");
+    }
+
+    @Test
+    void should_notPrintNonXmlPromptMessages_whenXmlModeIsEnabled() {
+        // given
+        InputStream originalIn = System.in;
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream capturedOut = new ByteArrayOutputStream();
+        String stdinData = "./target/test-classes/KlasaTestowa.class\n\n";
+
+        // when
+        try {
+            System.setIn(new ByteArrayInputStream(stdinData.getBytes()));
+            System.setOut(new PrintStream(capturedOut));
+            MetricsFilter.main(new String[]{"-x"});
+        } finally {
+            System.setIn(originalIn);
+            System.setOut(originalOut);
+        }
+
+        // then
+        String output = capturedOut.toString();
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setNamespaceAware(false);
+            StringReader xmlReader = new StringReader(output);
+            InputSource source = new InputSource(xmlReader);
+
+            factory.newDocumentBuilder().parse(source);
+        } catch (Exception e) {
+            throw new AssertionError("Expected parseable XML output, but parsing failed. Output was:\n" + output, e);
         }
     }
 

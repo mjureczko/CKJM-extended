@@ -17,27 +17,27 @@ import java.util.Set;
  * @author mjureczko
  */
 public class CmdLineParser {
-    
+
+    public static final String XML_MODE_ARG = "x";
     private Set<String> args;
     List<String> classes;
-    
-    public void parse(String[] argv){
+
+    public void parse(String[] argv) {
         args = new HashSet<String>();
         classes = new ArrayList<String>();
-        
-        for( String s : argv ){
-            if( s.startsWith("-")){
-                for( int i=1; i<s.length(); i++){
-                    args.add(s.substring(i, i+1));
-                }   
-            }
-            else{
+
+        for (String s : argv) {
+            if (s.startsWith("-")) {
+                for (int i = 1; i < s.length(); i++) {
+                    args.add(s.substring(i, i + 1));
+                }
+            } else {
                 addClass(s);
             }
         }
-        
-        if(classes.isEmpty()){
-            readClassesFromStdio();
+
+        if (classes.isEmpty()) {
+            readClassesFromStdio(args.contains(XML_MODE_ARG));
         }
     }
 
@@ -45,28 +45,30 @@ public class CmdLineParser {
         String[] names = colonSeparatedNames.split(";");
         classes.addAll(Arrays.asList(names));
     }
-    
-    public boolean isArgSet(String arg){
+
+    public boolean isArgSet(String arg) {
         return args.contains(arg);
     }
-    
-    public List<String> getClassNames(){
+
+    public List<String> getClassNames() {
         return classes;
     }
 
-    private void readClassesFromStdio() {
-        System.out.println("Please enter fully qualified names of the java classes to analyse.");
-        System.out.println("Each class should be entered in separate line.");
-        System.out.println("After the last class press enter to continue.");
+    private void readClassesFromStdio(boolean xmlMode) {
+        if (!xmlMode) {
+            System.out.println("Please enter fully qualified names of the java classes to analyse.");
+            System.out.println("Each class should be entered in separate line.");
+            System.out.println("After the last class press enter to continue.");
+        }
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         try {
             String s;
-            while ((s = in.readLine()) != null && s.length()>0)
+            while ((s = in.readLine()) != null && !s.isEmpty())
                 addClass(s);
         } catch (Exception e) {
-            LoggerHelper.printError( "Error reading line: " + e);
+            LoggerHelper.printError("Error reading line: " + e);
             System.exit(1);
         }
     }
-            
+
 }
