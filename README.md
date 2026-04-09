@@ -230,87 +230,6 @@ The original definition of the metrics, and implementation details of both the p
 - RFC is calculated up to the first method call level, and not through the transitive closure of all method calls. Rationale: ease of implementation, and compatibility with Chidamber and Kemerer. 
 - A class's own methods contribute to its RFC. Rationale: the original Chidamber and Kemerer article describes RFC as a union of the set of methods called by the class and the set of methods in the class.
 
-## Using Ckjm With Ant
-
-First define the ant task in your build.xml file. The ckjm jar file should be in the classpath. 
-```xml
-<taskdef name="ckjm" classname="gr.spinellis.ckjm.ant.CkjmTask">
-  <classpath>
-    <pathelement location="path/to/ckjm1-2.jar"/>
-  </classpath>
-</taskdef>
-```
-
-Now you can make use of the ckjm task. The attributes of the ckjm task are the following:
-
-format
-
-'plain' or 'xml'. Default is 'plain'
-
-outputfile
-
-Required. Output will be written to outputfile.
-
-classdir
-
-Required (if classjars is not set). Base directory which contains the class files.
-
-classjars
-
-Required (if classdir is not set). Jar files that contains the classes to analyse.
-
-The ckjm task supports the nested elements <include> and <exclude>, which can be used to select the class files and the nested element <extdirs>, which is used to specify other class files participating in the inheritance hierarchy. Please notice that extdirs must point to a directory. All jar files from the directory will be included to classpath (in fact the directory will be appended to java.ext.dirs and the classpaht won't changed). You can use extdirs neither to include class files nor to include one, given by name jar file. 
-The elements support [path-like structures](http://ant.apache.org/manual/using.html#path). Example usage: 
-```xml
-<ckjm outputfile="ckjm.xml" format="xml" classdir="build/classes">
-  <include name="**/*.class" />
-  <exclude name="**/*Test.class" />
-  <extdirs path="lib" />
-</ckjm>
-```
-
-Example usage with the classjars attribute:
-```xml
-<ckjm outputfile="ckjm.xml" format="xml" classjars="ant.jar:bcel-5.1.jar">
-  <extdirs path="bcel-5.1.jar" />
-  <extdirs path="ant.jar" />
-</ckjm>
-```
-
-You can use an XSL stylesheet to generate an HTML report from the XML output file. Example: 
-```xml
-<xslt in="ckjm.xml" style="path/to/ckjm.xsl" out="ckjm.html" />
-```
-
-The distribution contains in the xsl directory two sample XSL files. Here is a complete example of a build.xml file. 
-```xml
-<project name="myproject" default="ckjm">
-
-<target name="compile">
-  <!-- your compile instructions -->
-</target>
-
-<target name="ckjm" depends="compile">
-
-  <taskdef name="ckjm" classname="gr.spinellis.ckjm.ant.CkjmTask">
-    <classpath>
-      <pathelement location="path/to/ckjm1-2.jar"/>
-    </classpath>
-  </taskdef>
-
-  <ckjm outputfile="ckjm.xml" format="xml" classdir="build/classes">
-    <include name="**/*.class" />
-    <exclude name="**/*Test.class" />
-  </ckjm>
-
-  <xslt in="ckjm.xml" style="path/to/ckjm.xsl" out="ckjm.html" />
-</target>
-
-</project> 
-```
-
-If the analyzed files form part of a class hierarchy of other class files that are not part of the analysis, then the extdirs path-like structure of the ckjm task must be set to point to the directory containing the corresponding jar files. This will internally set the java.ext.dirs property so that ckjm can locate the jar files containing those classes. 
-
 ## Web Links and Acknowledgements
 
 - [Metrics for Object Oriented Software Development](http://javaboutique.internet.com/tutorials/codemetrics/)
@@ -353,7 +272,24 @@ The ckjm program calculates the metrics from the code appearing in the compiled 
 You can use the open source tool retroweaver to create a backwards-compatible jar file. (Suggested by Paul King).
 
 ### I'm getting a ClassNotFoundException. How can I fix it?
-If you are getting messages like the one below, it means that ckjm can't locate the code for the corresponding classes, in order to properly calculate the depth of the inheritance tree (DIT) metric. java.lang.ClassNotFoundException: Exception while looking for class javax.servlet.http.HttpServlet: java.io.IOException: Couldn't find: javax.servlet.http.HttpServlet.class To solve this problem you must explicitly setup the java.ext.dirs property pointing to a directory containing the jar files where ckjm can locate those classes. Example: java -Djava.ext.dirs=lib -jar ckjm-1.8.jar *.class
+If you are getting messages like the one below, it means that ckjm can't locate the code for the corresponding classes, in order to properly calculate a metric.
+```
+java.lang.ClassNotFoundException: Exception while looking for class javax.servlet.http.HttpServlet: java.io.IOException: Couldn't find: javax.servlet.http.HttpServlet.class
+```
+To solve this problem you must add required dependencies to the classpath using the `-cp` flag. In direct class mode (not `-jar`), make sure the classpath contains:
+- `ckjm_ext.jar`
+- dependency jars
+- analyzed classes (for example `build/classes`)
+
+Example:
+```bash
+java -cp "ckjm_ext.jar:build/classes:/path/to/deps/*" gr.spinellis.ckjm.MetricsFilter *.class
+```
+Alternatively, you can stream analyzed class file names through standard input:
+```bash
+java -cp "ckjm_ext.jar:build/classes:/path/to/deps/*" gr.spinellis.ckjm.MetricsFilter < <(find directory -name '*.class')
+```
+Note: When using `java -jar`, the classpath cannot be overridden with `-cp`, so run ckjm as a direct class invocation when extra classpath entries are needed.
 
 ### I'm using ckjm to collect metrics for a research. How shall I cite it?
 The extended version of ckjm was originally reported in:
@@ -389,7 +325,7 @@ XML output and Ant task
 
 - jazzmuesli
 
-BCEL upgrade to 6.5.0 
+BCEL upgrade to 6.5.0
 
 ## Download
 
